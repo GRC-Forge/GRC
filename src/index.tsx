@@ -230,10 +230,10 @@ const PAGE_HTML = `<!doctype html>
           </div>
         </div>
         <h3 class="pillar__title">Governance</h3>
-        <p class="pillar__desc">SAP GRC, internal audit, compliance and enterprise risk — reframed as instruments a working risk officer would use on a Monday morning.</p>
+        <p class="pillar__desc">Enterprise access governance, internal audit, compliance and enterprise risk — reframed as instruments a working risk officer would use on a Monday morning.</p>
         <ul class="pillar__submodules">
           <li><span class="pillar__sub-num">2.1</span><span class="pillar__sub-name">GRC Professional</span><span class="badge badge--soon" style="padding:2px 8px;">Q3 2026</span></li>
-          <li><span class="pillar__sub-num">2.2</span><span class="pillar__sub-name">SAP GRC</span><span class="badge badge--soon" style="padding:2px 8px;">Q3 2026</span></li>
+          <li><span class="pillar__sub-num">2.2</span><span class="pillar__sub-name">Delegation of Authority</span><span class="badge badge--soon" style="padding:2px 8px;">Q3 2026</span></li>
           <li><span class="pillar__sub-num">2.3</span><span class="pillar__sub-name">Internal Audit</span><span class="badge" style="padding:2px 8px;">Q4 2026</span></li>
           <li><span class="pillar__sub-num">2.4</span><span class="pillar__sub-name">Compliance</span><span class="badge" style="padding:2px 8px;">Q1 2027</span></li>
           <li><span class="pillar__sub-num">2.5</span><span class="pillar__sub-name">Risk Management</span><span class="badge" style="padding:2px 8px;">Q1 2027</span></li>
@@ -530,7 +530,7 @@ const PAGE_HTML = `<!doctype html>
           <h2 class="h2" style="margin-top: 18px;">Governance,<br><span class="serif" style="color: var(--gold-light);">without the ceremony.</span></h2>
         </div>
         <p class="lead" style="max-width: 44ch;">
-          SAP GRC, internal audit, compliance, risk management. Reframed as
+          Delegation of authority, internal audit, compliance, risk management. Reframed as
           instruments a working risk officer would actually use on a Monday morning.
         </p>
       </div>
@@ -575,7 +575,7 @@ const PAGE_HTML = `<!doctype html>
           <div class="grc-table__row"><span>User access request · IT-Admin bundle</span><span class="mono">Rev 2/3</span><span class="badge badge--soon" style="padding: 2px 8px;">In review</span></div>
           <div class="grc-table__row"><span>Policy exception · vendor-master</span><span class="mono">SLA 4d</span><span class="badge" style="padding: 2px 8px;">Pending</span></div>
           <div class="grc-table__row"><span>Role change · FI Controller</span><span class="mono">v3.1</span><span class="badge badge--live" style="padding: 2px 8px;">Approved</span></div>
-          <div class="grc-table__row"><span>Control test · SoD FB60↔MIRO</span><span class="mono">Auto</span><span class="badge badge--live" style="padding: 2px 8px;">Active</span></div>
+          <div class="grc-table__row"><span>Control test · SoD payables↔procurement</span><span class="mono">Auto</span><span class="badge badge--live" style="padding: 2px 8px;">Active</span></div>
         </div>
         <div class="grc-table">
           <h4 class="h4" style="margin-bottom: 14px;">Risk heat</h4>
@@ -595,8 +595,8 @@ const PAGE_HTML = `<!doctype html>
       </div>
       <div class="grc-tool">
         <div class="grc-tool__num">2.2 · Q3 2026</div>
-        <h4 class="h4">SAP GRC</h4>
-        <p>Role bundles, access risk analysis and emergency-access management — mapped to the SAP transaction reality.</p>
+        <h4 class="h4">Delegation of Authority</h4>
+        <p>Thresholds, approval chains and escalation paths — mapped to real spend and sign-off authority across the org.</p>
       </div>
       <div class="grc-tool">
         <div class="grc-tool__num">2.3 · Q4 2026</div>
@@ -652,9 +652,9 @@ const PAGE_HTML = `<!doctype html>
       </a>
       <a href="#" class="research">
         <div class="research__meta"><span>FRAMEWORK · 9 min</span><span>Jun 2026</span></div>
-        <h3 class="research__title">SoD design patterns for mid-sized SAP tenants</h3>
+        <h3 class="research__title">SoD design patterns for mid-sized ERP tenants</h3>
         <p class="research__brief">Twelve archetype conflicts and the composite roles that consistently resolve them without paralyzing finance.</p>
-        <div class="research__tags"><span class="tag">GRC</span><span class="tag">SAP</span></div>
+        <div class="research__tags"><span class="tag">GRC</span><span class="tag">ERP</span></div>
       </a>
       <a href="#" class="research">
         <div class="research__meta"><span>NOTE · 4 min</span><span>Jun 2026</span></div>
@@ -722,7 +722,7 @@ const PAGE_HTML = `<!doctype html>
     <div class="resources-grid" data-reveal>
       <a href="#" class="resource">
         <div class="resource__meta"><span class="mono">XLSX · 24 KB</span><span class="badge badge--live" style="padding:2px 8px;">Live</span></div>
-        <h4 class="h4" style="margin-top: 8px;">SoD conflict matrix · SAP FI/CO</h4>
+        <h4 class="h4" style="margin-top: 8px;">SoD conflict matrix · Finance &amp; Procurement</h4>
         <p class="resource__desc">Twelve archetype conflicts, colour-coded severity, composite-role suggestions.</p>
         <span class="resource__cta">Download <span>↓</span></span>
       </a>
@@ -881,7 +881,7 @@ const PAGE_HTML = `<!doctype html>
         <h5>Governance</h5>
         <ul>
           <li><a href="#governance">GRC Professional</a></li>
-          <li><a href="#">SAP GRC</a></li>
+          <li><a href="#">Delegation of Authority</a></li>
           <li><a href="#">Internal Audit</a></li>
           <li><a href="#">Compliance</a></li>
           <li><a href="#">Risk Management</a></li>

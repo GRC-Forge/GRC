@@ -18,7 +18,7 @@ GRC FORGE
 │   └── AI Research           (beta)
 ├── Governance
 │   ├── GRC Professional      (Q3 2026)
-│   ├── SAP GRC                (Q3 2026)
+│   ├── Delegation of Authority (Q3 2026)
 │   ├── Internal Audit         (Q4 2026)
 │   ├── Compliance             (Q1 2027)
 │   └── Risk Management        (Q1 2027)
@@ -54,7 +54,7 @@ GRC FORGE
   segmented controls for risk/entry, live-recomputed allocation %, donut chart, 3-scenario SVG
   line chart, break-even math). Math ported verbatim from the design's `planner.js`.
 - **Governance control-plane teaser** — dashboard mock with stats, approval workflow & risk-heat
-  tables, and 5 tool cards (GRC Professional, SAP GRC, Internal Audit, Compliance, Risk Mgmt).
+  tables, and 5 tool cards (GRC Professional, Delegation of Authority, Internal Audit, Compliance, Risk Mgmt).
 - **Research hub** — category chips + 9-card research grid.
 - **Resources** — 6 downloadable-template cards.
 - **About / Why GRC Forge** — 4 principle cards.
