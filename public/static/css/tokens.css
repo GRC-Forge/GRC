@@ -1,0 +1,201 @@
+/* =========================================================
+   GRC Forge — Design Tokens
+   Dark is the primary theme; light is the softer counterpart.
+   ========================================================= */
+
+:root,
+[data-mode="dark"] {
+  /* Brand */
+  --gold: #C9A34A;
+  --gold-light: #F1D488;
+  --gold-deep: #8A6B24;
+  --silver: #CBD2DC;
+
+  /* Surface — dark */
+  --bg: #050B12;
+  --bg-elev: #0A121C;
+  --surface: #0B1623;
+  --surface-2: #122131;
+  --surface-3: #17293C;
+  --border: #233445;
+  --border-strong: #2E455D;
+  --hairline: rgba(201, 163, 74, 0.22);
+  --hairline-soft: rgba(201, 163, 74, 0.10);
+
+  /* Text — dark */
+  --text: #F5F7FA;
+  --text-2: #9CA9B8;
+  --text-3: #64738A;
+  --text-invert: #0B1623;
+
+  /* Semantic */
+  --success: #3CCB7F;
+  --warning: #F4B740;
+  --danger:  #E34D59;
+  --info:    #4DA3FF;
+
+  /* Glass */
+  --glass: rgba(11, 22, 35, 0.55);
+  --glass-strong: rgba(11, 22, 35, 0.82);
+  --glass-border: rgba(201, 163, 74, 0.18);
+
+  /* Glow */
+  --hero-glow: radial-gradient(circle at 70% 30%,
+                 rgba(201,163,74,0.20) 0%,
+                 rgba(201,163,74,0.05) 30%,
+                 transparent 60%);
+  --card-glow: radial-gradient(circle at 100% 0%,
+                 rgba(201,163,74,0.10) 0%,
+                 transparent 45%);
+
+  /* Chart palette */
+  --chart-1: #C9A34A;
+  --chart-2: #4DA3FF;
+  --chart-3: #3CCB7F;
+  --chart-4: #CBD2DC;
+  --chart-grid: rgba(255,255,255,0.06);
+}
+
+[data-mode="light"] {
+  --bg: #F7F5EF;
+  --bg-elev: #FFFFFF;
+  --surface: #FFFFFF;
+  --surface-2: #F1EDE3;
+  --surface-3: #E8E2D2;
+  --border: #E2DCCC;
+  --border-strong: #C9BFA6;
+  --hairline: rgba(138, 107, 36, 0.30);
+  --hairline-soft: rgba(138, 107, 36, 0.12);
+
+  --gold: #8A6B24;
+  --gold-light: #C9A34A;
+  --gold-deep: #6B5119;
+  --silver: #5A6472;
+
+  --text: #14202E;
+  --text-2: #4A5666;
+  --text-3: #7A8598;
+  --text-invert: #FFFFFF;
+
+  --success: #1F8A5B;
+  --warning: #B87A00;
+  --danger:  #B03642;
+  --info:    #1E6BC6;
+
+  --glass: rgba(255, 255, 255, 0.70);
+  --glass-strong: rgba(255, 255, 255, 0.92);
+  --glass-border: rgba(138, 107, 36, 0.22);
+
+  --hero-glow: radial-gradient(circle at 70% 30%,
+                 rgba(201,163,74,0.28) 0%,
+                 rgba(201,163,74,0.08) 30%,
+                 transparent 60%);
+  --card-glow: radial-gradient(circle at 100% 0%,
+                 rgba(138,107,36,0.10) 0%,
+                 transparent 45%);
+
+  --chart-1: #8A6B24;
+  --chart-2: #1E6BC6;
+  --chart-3: #1F8A5B;
+  --chart-4: #5A6472;
+  --chart-grid: rgba(0,0,0,0.06);
+}
+
+/* Accent palette variants (Tweaks) */
+[data-accent="platinum"] {
+  --gold: #B8C0CC;
+  --gold-light: #E0E5EE;
+  --gold-deep: #6E7684;
+  --hairline: rgba(184, 192, 204, 0.30);
+  --hairline-soft: rgba(184, 192, 204, 0.14);
+  --glass-border: rgba(184, 192, 204, 0.22);
+  --chart-1: #B8C0CC;
+}
+[data-accent="copper"] {
+  --gold: #C97A4A;
+  --gold-light: #E8A375;
+  --gold-deep: #7A4321;
+  --hairline: rgba(201, 122, 74, 0.28);
+  --hairline-soft: rgba(201, 122, 74, 0.12);
+  --glass-border: rgba(201, 122, 74, 0.22);
+  --chart-1: #C97A4A;
+}
+
+/* Density */
+:root {
+  --unit: 8px;
+  --gap-1: 4px;
+  --gap-2: 8px;
+  --gap-3: 12px;
+  --gap-4: 16px;
+  --gap-5: 24px;
+  --gap-6: 32px;
+  --gap-7: 48px;
+  --gap-8: 64px;
+  --gap-9: 96px;
+  --gap-10: 128px;
+
+  --section-py: clamp(80px, 12vh, 140px);
+  --container: 1240px;
+  --content-px: clamp(20px, 4vw, 40px);
+
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.15);
+  --shadow: 0 8px 24px rgba(0,0,0,0.25);
+  --shadow-lg: 0 24px 60px rgba(0,0,0,0.45);
+
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+  --ease-in-out: cubic-bezier(.6, .05, .3, .95);
+}
+
+[data-density="airy"] {
+  --section-py: clamp(120px, 16vh, 180px);
+  --gap-6: 40px;
+  --gap-7: 64px;
+  --gap-8: 96px;
+}
+[data-density="dense"] {
+  --section-py: clamp(56px, 8vh, 96px);
+  --gap-5: 16px;
+  --gap-6: 24px;
+  --gap-7: 32px;
+  --gap-8: 48px;
+}
+
+/* Type scale */
+:root {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: "Fraunces", "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --font-arabic: "Cairo", "Tajawal", "Inter", sans-serif;
+
+  --fs-mono: 12px;
+  --fs-small: 14px;
+  --fs-body: 16px;
+  --fs-lg: 18px;
+  --fs-h4: clamp(20px, 1.8vw, 24px);
+  --fs-h3: clamp(24px, 2.2vw, 30px);
+  --fs-h2: clamp(30px, 3.2vw, 44px);
+  --fs-h1: clamp(44px, 6.4vw, 96px);
+  --fs-display: clamp(56px, 9vw, 132px);
+
+  --lh-tight: 1.02;
+  --lh-snug: 1.15;
+  --lh-normal: 1.5;
+  --lh-loose: 1.7;
+
+  --tracking-mono: 0.14em;
+  --tracking-tight: -0.02em;
+  --tracking-display: -0.035em;
+}
+
+[dir="rtl"] {
+  --font-sans: "Cairo", "Tajawal", "Inter", sans-serif;
+  --font-serif: "Cairo", "Tajawal", ui-serif, serif;
+  --tracking-display: 0;
+  --tracking-tight: 0;
+}
