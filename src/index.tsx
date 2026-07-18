@@ -182,7 +182,7 @@ const PAGE_HTML = `<!doctype html>
     <div class="section-head" data-reveal>
       <div class="section-head__row">
         <div>
-          <span class="eyebrow"><span data-i18n="platforms.eyebrow">Section 01 — Pillars</span></span>
+          <span class="eyebrow"><span data-i18n="platforms.eyebrow">Pillars</span></span>
           <h2 class="h2" style="margin-top: 18px;">Five practice pillars.<br>
             <span class="serif" style="color: var(--gold-light);">One shared spine.</span></h2>
         </div>
@@ -198,7 +198,6 @@ const PAGE_HTML = `<!doctype html>
       <!-- 01 Intelligence -->
       <article class="pillar" data-reveal>
         <div class="pillar__head">
-          <span class="pillar__ordinal">01</span>
           <div class="pillar__meta">
             <span class="badge badge--live"><span class="badge__dot"></span>Live</span>
             <span class="mono">3 modules</span>
@@ -225,7 +224,6 @@ const PAGE_HTML = `<!doctype html>
       <!-- 02 Governance -->
       <article class="pillar" data-reveal>
         <div class="pillar__head">
-          <span class="pillar__ordinal">02</span>
           <div class="pillar__meta">
             <span class="badge badge--soon"><span class="badge__dot"></span>Coming Soon</span>
             <span class="mono">5 modules</span>
@@ -246,7 +244,6 @@ const PAGE_HTML = `<!doctype html>
       <!-- 03 Business -->
       <article class="pillar" data-reveal>
         <div class="pillar__head">
-          <span class="pillar__ordinal">03</span>
           <div class="pillar__meta">
             <span class="badge badge--future"><span class="badge__dot"></span>Future</span>
             <span class="mono">5 modules</span>
@@ -267,7 +264,6 @@ const PAGE_HTML = `<!doctype html>
       <!-- 04 Venture -->
       <article class="pillar" data-reveal>
         <div class="pillar__head">
-          <span class="pillar__ordinal">04</span>
           <div class="pillar__meta">
             <span class="badge badge--future"><span class="badge__dot"></span>Future</span>
             <span class="mono">4 modules</span>
@@ -287,7 +283,6 @@ const PAGE_HTML = `<!doctype html>
       <!-- 05 AI -->
       <article class="pillar" data-reveal>
         <div class="pillar__head">
-          <span class="pillar__ordinal">05</span>
           <div class="pillar__meta">
             <span class="badge badge--future"><span class="badge__dot"></span>Future</span>
             <span class="mono">4 modules</span>
@@ -315,7 +310,6 @@ const PAGE_HTML = `<!doctype html>
       <!-- 06 Research + Resources + About : flat pillars -->
       <article class="pillar pillar--flat" data-reveal>
         <div class="pillar__head">
-          <span class="pillar__ordinal">06</span>
           <div class="pillar__meta">
             <span class="badge badge--beta"><span class="badge__dot"></span>Beta v1</span>
             <span class="mono">Rolling</span>
@@ -338,7 +332,7 @@ const PAGE_HTML = `<!doctype html>
   <div class="container">
     <div class="featured__header" data-reveal>
       <div>
-        <span class="eyebrow"><span data-i18n="gold.eyebrow">Section 02 — Intelligence · Gold Intelligence</span></span>
+        <span class="eyebrow"><span data-i18n="gold.eyebrow">Intelligence · Gold Intelligence</span></span>
         <h2 class="h2" style="margin-top: 18px;">Gold, <span class="serif" style="color: var(--gold-light);">without the guesswork.</span></h2>
         <p class="lead" style="margin-top: 20px;">
           The Investment Planner turns your budget, horizon and risk appetite into a concrete
@@ -532,7 +526,7 @@ const PAGE_HTML = `<!doctype html>
     <div class="section-head" data-reveal>
       <div class="section-head__row">
         <div>
-          <span class="eyebrow">Section 03 — Governance · GRC Professional</span>
+          <span class="eyebrow">Governance · GRC Professional</span>
           <h2 class="h2" style="margin-top: 18px;">Governance,<br><span class="serif" style="color: var(--gold-light);">without the ceremony.</span></h2>
         </div>
         <p class="lead" style="max-width: 44ch;">
@@ -629,7 +623,7 @@ const PAGE_HTML = `<!doctype html>
     <div class="section-head" data-reveal>
       <div class="section-head__row">
         <div>
-          <span class="eyebrow">Section 04 — Research</span>
+          <span class="eyebrow">Research</span>
           <h2 class="h2" style="margin-top: 18px;">Notes written<br><span class="serif" style="color: var(--gold-light);">to be used.</span></h2>
         </div>
         <p class="lead" style="max-width: 42ch;">
@@ -714,7 +708,7 @@ const PAGE_HTML = `<!doctype html>
     <div class="section-head" data-reveal>
       <div class="section-head__row">
         <div>
-          <span class="eyebrow">Section 05 — Resources</span>
+          <span class="eyebrow">Resources</span>
           <h2 class="h2" style="margin-top: 18px;">Templates,<br><span class="serif" style="color: var(--gold-light);">toolkits, downloads.</span></h2>
         </div>
         <p class="lead" style="max-width: 42ch;">
@@ -772,7 +766,7 @@ const PAGE_HTML = `<!doctype html>
     <div class="section-head" data-reveal>
       <div class="section-head__row">
         <div>
-          <span class="eyebrow">Section 07 — About</span>
+          <span class="eyebrow">About</span>
           <h2 class="h2" style="margin-top: 18px;">Why <span class="serif" style="color: var(--gold-light);">GRC Forge</span> exists.</h2>
         </div>
       </div>
@@ -810,7 +804,7 @@ const PAGE_HTML = `<!doctype html>
     <div class="section-head" data-reveal>
       <div class="section-head__row">
         <div>
-          <span class="eyebrow">Section 08 — Latest updates</span>
+          <span class="eyebrow">Latest updates</span>
           <h2 class="h2" style="margin-top: 18px;">What we shipped.</h2>
         </div>
         <a href="#" class="pillar__cta">Full changelog <span>→</span></a>
@@ -853,7 +847,7 @@ const PAGE_HTML = `<!doctype html>
     <div class="section-head" data-reveal>
       <div class="section-head__row">
         <div>
-          <span class="eyebrow">Section 09 — Design system</span>
+          <span class="eyebrow">Design system</span>
           <h2 class="h2" style="margin-top: 18px;">The <span class="serif" style="color: var(--gold-light);">spine.</span></h2>
         </div>
         <p class="lead" style="max-width: 42ch;">

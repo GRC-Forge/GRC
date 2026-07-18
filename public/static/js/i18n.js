@@ -23,8 +23,8 @@
     'metrics.lang': 'لغتان مدعومتان — العربية والإنجليزية، مع دعم أصلي للاتجاه من اليمين إلى اليسار',
     'metrics.brand': 'نظام علامة تجارية موحد عبر كل منتجات المنصة',
 
-    'platforms.eyebrow': 'القسم ٠١ — الركائز',
-    'gold.eyebrow': 'القسم ٠٢ — الاستخبارات · استخبارات الذهب'
+    'platforms.eyebrow': 'الركائز',
+    'gold.eyebrow': 'الاستخبارات · استخبارات الذهب'
   };
 
   const EN = {}; // English uses whatever is already in the DOM as source of truth

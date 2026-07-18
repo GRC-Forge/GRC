@@ -598,21 +598,12 @@ html.js-ready [data-reveal].is-in {
 .pillar:hover::before { opacity: 1; }
 .pillar__head {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: start;
   gap: 12px;
   margin-bottom: 24px;
   position: relative;
 }
-.pillar__ordinal {
-  font-family: var(--font-mono);
-  font-size: 44px;
-  color: var(--gold);
-  font-weight: 300;
-  line-height: 1;
-  letter-spacing: -0.02em;
-}
-[data-mode="light"] .pillar__ordinal { color: var(--gold-deep); }
 .pillar__meta {
   text-align: end;
   display: flex;
