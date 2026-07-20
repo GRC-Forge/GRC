@@ -54,21 +54,6 @@
   --chart-3: #3CCB7F;
   --chart-4: #CBD2DC;
   --chart-grid: rgba(255,255,255,0.06);
-
-  /* Brand mark + pillar accent system */
-  --navy-shield: #0E1B33;
-  --pillar-gold:       #C9A34A;  /* Intelligence · Gold   */
-  --pillar-governance: #5B87B5;  /* Governance — steel    */
-  --pillar-business:   #34A47C;  /* Business — emerald    */
-  --pillar-venture:    #C97A4A;  /* Venture — copper      */
-  --pillar-ai:         #8F7ED6;  /* AI — violet           */
-
-  /* Aliases for backwards compatibility */
-  --intelligence: var(--pillar-gold);
-  --governance: var(--pillar-governance);
-  --business: var(--pillar-business);
-  --venture: var(--pillar-venture);
-  --ai: var(--pillar-ai);
 }
 
 [data-mode="light"] {
@@ -114,13 +99,6 @@
   --chart-3: #1F8A5B;
   --chart-4: #5A6472;
   --chart-grid: rgba(0,0,0,0.06);
-
-  --navy-shield: #14264A;
-  --pillar-gold:       #8A6B24;
-  --pillar-governance: #3E6B9B;
-  --pillar-business:   #1F8A5B;
-  --pillar-venture:    #A85A2E;
-  --pillar-ai:         #6C5BB8;
 }
 
 /* Accent palette variants (Tweaks) */
@@ -133,7 +111,6 @@
   --glass-border: rgba(184, 192, 204, 0.22);
   --chart-1: #B8C0CC;
 }
-
 [data-accent="copper"] {
   --gold: #C97A4A;
   --gold-light: #E8A375;
@@ -181,7 +158,6 @@
   --gap-7: 64px;
   --gap-8: 96px;
 }
-
 [data-density="dense"] {
   --section-py: clamp(56px, 8vh, 96px);
   --gap-5: 16px;
