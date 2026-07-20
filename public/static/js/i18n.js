@@ -25,6 +25,7 @@
 
     'platforms.eyebrow': 'الركائز',
     'gold.eyebrow': 'الاستخبارات · استخبارات الذهب',
+    'gold.cta': 'افتح مخطط الذهب ↓',
 
     'biz.eyebrow': 'الأعمال · محركات القرار',
     'biz.title': 'الاستراتيجية،<br><span class="serif" style="color: var(--gold-light);">من دون عروض جوفاء.</span>',
