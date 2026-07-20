@@ -1,1768 +1,1145 @@
-/* =========================================================
-   GRC Forge — App styles
-   ========================================================= */
-*, *::before, *::after { box-sizing: border-box; }
+import { Hono } from 'hono'
+import { serveStatic } from 'hono/cloudflare-workers'
 
-html, body {
-  margin: 0;
-  padding: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font-sans);
-  font-size: var(--fs-body);
-  line-height: var(--lh-normal);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-  scroll-behavior: smooth;
-  transition: background-color .35s var(--ease-out), color .35s var(--ease-out);
-}
+const app = new Hono()
 
-body {
-  overflow-x: hidden;
-  min-height: 100vh;
-}
+app.use('/static/*', serveStatic({ root: './public' }))
 
-img, svg { display: block; max-width: 100%; }
-a { color: inherit; text-decoration: none; }
-button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
-:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 3px; }
+app.get('/', (c) => {
+  return c.html(PAGE_HTML)
+})
 
-::selection { background: var(--gold); color: var(--text-invert); }
+const PAGE_HTML = `<!doctype html>
+<html lang="en" data-mode="dark" data-density="balanced" data-accent="gold" dir="ltr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>GRC Forge — Governance, Risk &amp; Decisions, forged into instruments.</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cpath%20d='M32%204%20L54%2011%20V31%20C54%2047%2044%2055%2032%2060%20C20%2055%2010%2047%2010%2031%20V11%20Z'%20fill='%230E1B33'%20stroke='%23C9A34A'%20stroke-width='4'%20stroke-linejoin='round'/%3E%3Ccircle%20cx='32'%20cy='17'%20r='3.5'%20fill='%23C9A34A'/%3E%3Ccircle%20cx='23'%20cy='26'%20r='3.5'%20fill='%23C9A34A'/%3E%3Ccircle%20cx='41'%20cy='26'%20r='3.5'%20fill='%23C9A34A'/%3E%3Cpath%20d='M16%2034%20H48%20V40%20H38%20V45%20H42%20V50%20H22%20V45%20H26%20V40%20H16%20Z'%20fill='%23C9A34A'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=JetBrains+Mono:wght@400;500&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/tokens.css">
+<link rel="stylesheet" href="/static/css/app.css">
+</head>
+<body>
 
-.container {
-  width: 100%;
-  max-width: var(--container);
-  margin: 0 auto;
-  padding-inline: var(--content-px);
-}
+<!-- ================= NAV ================= -->
+<header class="nav" role="banner">
+  <a class="nav__brand" href="#top" aria-label="GRC Forge home">
+    <svg class="nav__brand-mark" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+      <path d="M32 4 L54 11 V31 C54 47 44 55 32 60 C20 55 10 47 10 31 V11 Z" fill="var(--navy-shield)" stroke="var(--gold)" stroke-width="3" stroke-linejoin="round"/>
+      <line x1="32" y1="16" x2="22" y2="26" stroke="var(--gold)" stroke-width="2"/>
+      <line x1="32" y1="16" x2="42" y2="26" stroke="var(--gold)" stroke-width="2"/>
+      <line x1="22" y1="26" x2="32" y2="36" stroke="var(--gold)" stroke-width="2"/>
+      <line x1="42" y1="26" x2="32" y2="36" stroke="var(--gold)" stroke-width="2"/>
+      <line x1="32" y1="36" x2="32" y2="42" stroke="var(--gold)" stroke-width="2"/>
+      <circle cx="32" cy="16" r="3.2" fill="var(--gold)"/>
+      <circle cx="22" cy="26" r="3.2" fill="var(--gold)"/>
+      <circle cx="42" cy="26" r="3.2" fill="var(--gold)"/>
+      <circle cx="32" cy="36" r="3.2" fill="var(--gold)"/>
+      <path d="M17 42 H47 V46 H38 V49 H41 V52 H23 V49 H26 V46 H17 Z" fill="var(--gold)"/>
+    </svg>
+    <span data-i18n="brand">GRC · FORGE</span>
+  </a>
+  <nav class="nav__links" aria-label="Primary">
+    <a href="#intelligence" data-i18n="nav.intelligence">Intelligence</a>
+    <a href="#governance" data-i18n="nav.governance">Governance</a>
+    <a href="#business" data-i18n="nav.business">Business</a>
+    <a href="#venture" data-i18n="nav.venture">Venture</a>
+    <a href="#ai" data-i18n="nav.ai">AI</a>
+    <a href="#research" data-i18n="nav.research">Research</a>
+    <a href="#resources" data-i18n="nav.resources">Resources</a>
+    <a href="#about" data-i18n="nav.about">About</a>
+  </nav>
+  <div class="nav__actions">
+    <button class="nav__icon-btn" id="rtl-toggle" title="Toggle Arabic / RTL" aria-label="Toggle Arabic">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h16M4 12h10M4 17h16"/></svg>
+    </button>
+    <button class="nav__icon-btn" id="mode-toggle" title="Toggle theme" aria-label="Toggle theme">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+    <a href="#governance" class="btn" style="padding: 8px 14px; font-size: 13px;">
+      <span data-i18n="nav.launch">Launch platform</span>
+      <span class="btn__arrow">→</span>
+    </a>
+  </div>
+</header>
 
-/* ---------- Typography helpers ---------- */
-.mono {
-  font-family: var(--font-mono);
-  font-size: var(--fs-mono);
-  letter-spacing: var(--tracking-mono);
-  text-transform: uppercase;
-  color: var(--text-2);
-  font-weight: 500;
-}
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--font-mono);
-  font-size: var(--fs-mono);
-  letter-spacing: var(--tracking-mono);
-  text-transform: uppercase;
-  color: var(--gold);
-  font-weight: 500;
-}
-.eyebrow::before {
-  content: "";
-  width: 24px;
-  height: 1px;
-  background: var(--gold);
-  opacity: .7;
-}
-.serif { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
-.h1 {
-  font-size: var(--fs-h1);
-  line-height: var(--lh-tight);
-  letter-spacing: var(--tracking-display);
-  font-weight: 500;
-  margin: 0;
-  text-wrap: balance;
-}
-.h2 {
-  font-size: var(--fs-h2);
-  line-height: var(--lh-snug);
-  letter-spacing: var(--tracking-tight);
-  font-weight: 500;
-  margin: 0;
-  text-wrap: balance;
-}
-.h3 {
-  font-size: var(--fs-h3);
-  line-height: var(--lh-snug);
-  letter-spacing: var(--tracking-tight);
-  font-weight: 500;
-  margin: 0;
-}
-.h4 {
-  font-size: var(--fs-h4);
-  line-height: 1.25;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  margin: 0;
-}
-.lead {
-  font-size: clamp(17px, 1.4vw, 20px);
-  line-height: 1.55;
-  color: var(--text-2);
-  text-wrap: pretty;
-  max-width: 62ch;
-}
-.muted { color: var(--text-2); }
-.faint { color: var(--text-3); }
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="hero__glow" aria-hidden="true"></div>
+  <div class="hero__grid-bg" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero__inner">
 
-/* ---------- Reveal ---------- */
-/* Only hide elements once JS opts them into staged reveal. This ensures
-   content is visible even if JS fails to load. */
-html.js-ready [data-reveal] {
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity .9s var(--ease-out), transform .9s var(--ease-out);
-}
-html.js-ready [data-reveal].is-in {
-  opacity: 1;
-  transform: translateY(0);
-}
+      <div>
+        <div class="hero__eyebrow-row" data-reveal>
+          <span class="eyebrow"><span data-i18n="hero.eyebrow">Professional intelligence platform</span></span>
+          <span class="hero__coord">24°42′N · 46°43′E</span>
+          <span class="badge badge--live"><span class="badge__dot"></span>System online</span>
+        </div>
 
-/* ---------- Nav ---------- */
-.nav {
-  position: fixed;
-  top: 14px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(calc(var(--container) - 40px), calc(100% - 32px));
-  z-index: 60;
-  background: var(--glass);
-  backdrop-filter: blur(20px) saturate(140%);
-  -webkit-backdrop-filter: blur(20px) saturate(140%);
-  border: 1px solid var(--glass-border);
-  border-radius: 999px;
-  padding: 10px 12px 10px 20px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  transition: background .3s, border-color .3s;
-}
-.nav__brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--font-mono);
-  letter-spacing: 0.18em;
-  font-size: 12px;
-  color: var(--text);
-  font-weight: 600;
-}
-.nav__brand-mark {
-  width: 26px;
-  height: 26px;
-  display: block;
-  flex-shrink: 0;
-}
-.nav__links {
-  display: flex;
-  gap: 4px;
-  margin-inline-start: auto;
-}
-.nav__links a {
-  padding: 8px 14px;
-  border-radius: 999px;
-  font-size: 13.5px;
-  color: var(--text-2);
-  transition: color .2s, background .2s;
-}
-.nav__links a:hover { color: var(--text); background: var(--hairline-soft); }
-.nav__actions { display: flex; gap: 6px; align-items: center; }
-.nav__icon-btn {
-  width: 34px;
-  height: 34px;
-  border-radius: 999px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-2);
-  border: 1px solid transparent;
-  transition: color .2s, border-color .2s, background .2s;
-}
-.nav__icon-btn:hover { color: var(--text); border-color: var(--border); background: var(--hairline-soft); }
-.nav__icon-btn.is-active { color: var(--gold); border-color: var(--hairline); }
+        <h1 data-reveal data-i18n-html="hero.headline">
+          Governance, risk<br>
+          &amp; decisions — <span class="serif">forged</span><br>
+          into instruments.
+        </h1>
 
-@media (max-width: 780px) {
-  .nav { padding: 10px 12px; }
-  .nav__links { display: none; }
-}
+        <p class="hero__sub" data-reveal data-i18n="hero.sub">
+          GRC Forge builds interactive tools for the people who make decisions under pressure —
+          risk officers, auditors, consultants, gold investors and founders. Not more articles. Real instruments.
+        </p>
 
-/* ---------- Button system ---------- */
-.btn {
-  --btn-bg: var(--gold);
-  --btn-fg: #0B1623;
-  --btn-border: var(--gold);
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 20px;
-  border-radius: 999px;
-  background: var(--btn-bg);
-  color: var(--btn-fg);
-  border: 1px solid var(--btn-border);
-  font-weight: 600;
-  font-size: 14.5px;
-  letter-spacing: -0.005em;
-  transition: transform .18s var(--ease-out), background .2s, box-shadow .2s, border-color .2s, color .2s;
-  will-change: transform;
-}
-.btn:hover { transform: translateY(-1px); box-shadow: 0 10px 30px -12px var(--gold); }
-.btn:active { transform: translateY(0); }
+        <div class="hero__cta" data-reveal>
+          <a href="#governance" class="btn">
+            <span data-i18n="hero.cta.primary">Enter Governance</span>
+            <span class="btn__arrow">→</span>
+          </a>
+          <a href="#platforms" class="btn btn--ghost">
+            <span data-i18n="hero.cta.secondary">Tour the pillars</span>
+          </a>
+        </div>
+      </div>
 
-.btn--ghost {
-  --btn-bg: transparent;
-  --btn-fg: var(--text);
-  --btn-border: var(--border-strong);
-}
-.btn--ghost:hover { --btn-border: var(--gold); box-shadow: none; }
+      <!-- Live console mock -->
+      <div class="console" data-reveal aria-hidden="true">
+        <div class="console__head">
+          <div class="console__title">
+            <span class="console__dots"><span></span><span></span><span></span></span>
+            <span>GRC · <strong>Forge Console</strong> / v1.0</span>
+          </div>
+          <span class="mono" style="color: var(--success);">● LIVE</span>
+        </div>
 
-.btn--outline {
-  --btn-bg: transparent;
-  --btn-fg: var(--gold);
-  --btn-border: var(--gold);
-}
-.btn--outline:hover { background: var(--hairline-soft); box-shadow: none; }
+        <div class="console__body">
+          <div class="stat">
+            <div class="stat__label">Gold / oz</div>
+            <div class="stat__value">2,384</div>
+            <div class="stat__delta">▲ +1.84%</div>
+          </div>
+          <div class="stat">
+            <div class="stat__label">24K / gram · SAR</div>
+            <div class="stat__value">287.6</div>
+            <div class="stat__delta">▲ +0.52%</div>
+          </div>
+          <div class="stat">
+            <div class="stat__label">Risk index</div>
+            <div class="stat__value">18</div>
+            <div class="stat__delta stat__delta--flat">— stable</div>
+          </div>
+        </div>
 
-.btn__arrow {
-  display: inline-block;
-  transition: transform .2s var(--ease-out);
-}
-.btn:hover .btn__arrow { transform: translateX(3px); }
-[dir="rtl"] .btn__arrow { transform: scaleX(-1); }
-[dir="rtl"] .btn:hover .btn__arrow { transform: scaleX(-1) translateX(3px); }
+        <div class="console__row">
+          <div class="console__list">
+            <div class="console__list-item"><span>Compliance coverage</span><strong>92%</strong></div>
+            <div class="console__list-item"><span>Open controls</span><strong>134</strong></div>
+            <div class="console__list-item"><span>Decision readiness</span><strong>86</strong></div>
+          </div>
+          <div class="mini-chart">
+            <div class="mini-chart__label">7-day trend</div>
+            <svg viewBox="0 0 200 40" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="sparkFill" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" stop-color="var(--gold)" stop-opacity="0.3"/>
+                  <stop offset="1" stop-color="var(--gold)" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <path d="M0,30 L20,24 L40,26 L60,18 L80,20 L100,14 L120,16 L140,10 L160,12 L180,6 L200,8 L200,40 L0,40 Z" fill="url(#sparkFill)"/>
+              <path d="M0,30 L20,24 L40,26 L60,18 L80,20 L100,14 L120,16 L140,10 L160,12 L180,6 L200,8" fill="none" stroke="var(--gold)" stroke-width="1.5"/>
+            </svg>
+            <div class="mini-chart__value">+4.2% <span class="mono" style="color:var(--text-3)">7D</span></div>
+          </div>
+        </div>
+      </div>
 
-/* ---------- Badge ---------- */
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  border: 1px solid var(--border);
-  color: var(--text-2);
-  background: var(--surface-2);
-}
-.badge__dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 999px;
-  background: var(--text-3);
-}
-.badge--live {
-  border-color: rgba(60, 203, 127, 0.4);
-  color: var(--success);
-  background: rgba(60, 203, 127, 0.08);
-}
-.badge--live .badge__dot {
-  background: var(--success);
-  box-shadow: 0 0 0 3px rgba(60, 203, 127, 0.18);
-  animation: pulse 2.4s ease-in-out infinite;
-}
-.badge--soon {
-  border-color: var(--hairline);
-  color: var(--gold);
-  background: rgba(201, 163, 74, 0.06);
-}
-.badge--soon .badge__dot { background: var(--gold); }
-.badge--beta { border-color: var(--info); color: var(--info); }
-.badge--beta .badge__dot { background: var(--info); }
-.badge--future { color: var(--text-2); }
-@keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 3px rgba(60, 203, 127, 0.18); }
-  50%      { box-shadow: 0 0 0 6px rgba(60, 203, 127, 0.05); }
-}
+    </div>
 
-/* ---------- Sections ---------- */
-.section {
-  position: relative;
-  padding-block: var(--section-py);
-}
-.section--tight { padding-block: calc(var(--section-py) * 0.6); }
-.section-head {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-  margin-bottom: 56px;
-}
-.section-head__row {
-  display: flex;
-  gap: 24px;
-  align-items: end;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-.hairline {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--hairline) 30%, var(--hairline) 70%, transparent);
-  border: 0;
-  margin: 0;
-}
-[dir="rtl"] .hairline {
-  background: linear-gradient(-90deg, transparent, var(--hairline) 30%, var(--hairline) 70%, transparent);
-}
+    <!-- Ticker -->
+    <div class="ticker" data-reveal>
+      <div class="ticker__track" id="ticker-track">
+        <!-- populated by JS -->
+      </div>
+    </div>
+  </div>
+</section>
 
-/* ---------- Hero ---------- */
-.hero {
-  position: relative;
-  padding-top: 140px;
-  padding-bottom: 80px;
-  overflow: hidden;
-}
-.hero__glow {
-  position: absolute;
-  inset: 0;
-  background: var(--hero-glow);
-  pointer-events: none;
-  z-index: 0;
-}
-.hero__grid-bg {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(to right, var(--hairline-soft) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--hairline-soft) 1px, transparent 1px);
-  background-size: 80px 80px;
-  mask-image: radial-gradient(ellipse at 50% 30%, black 20%, transparent 70%);
-  -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 20%, transparent 70%);
-  pointer-events: none;
-  opacity: .6;
-  z-index: 0;
-}
-.hero__inner {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: 1.05fr 1fr;
-  gap: 60px;
-  align-items: center;
-}
-@media (max-width: 960px) {
-  .hero__inner { grid-template-columns: 1fr; gap: 40px; }
-  .hero { padding-top: 110px; }
-}
-.hero__eyebrow-row {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 28px;
-  flex-wrap: wrap;
-}
-.hero__coord {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--text-3);
-  letter-spacing: 0.14em;
-}
-.hero h1 {
-  font-size: var(--fs-h1);
-  line-height: 0.98;
-  letter-spacing: var(--tracking-display);
-  font-weight: 500;
-  margin: 0;
-}
-.hero h1 .serif {
-  color: var(--gold-light);
-}
-[data-mode="light"] .hero h1 .serif { color: var(--gold-deep); }
-.hero__sub {
-  margin-top: 28px;
-  max-width: 46ch;
-  font-size: clamp(16px, 1.3vw, 19px);
-  color: var(--text-2);
-  line-height: 1.55;
-}
-.hero__cta {
-  margin-top: 40px;
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
+<!-- ================= METRICS ================= -->
+<section class="section section--tight">
+  <div class="container">
+    <div class="metrics">
+      <div class="metrics__cell">
+        <div class="metrics__value">05</div>
+        <div class="metrics__label" data-i18n="metrics.pillars">Practice pillars — Intelligence, Governance, Business, Venture and AI</div>
+      </div>
+      <div class="metrics__cell">
+        <div class="metrics__value">20+</div>
+        <div class="metrics__label" data-i18n="metrics.tools">Modules across the pillars in the 2026 roadmap</div>
+      </div>
+      <div class="metrics__cell">
+        <div class="metrics__value">2</div>
+        <div class="metrics__label" data-i18n="metrics.lang">Languages supported — English and Arabic, RTL native</div>
+      </div>
+      <div class="metrics__cell">
+        <div class="metrics__value">01</div>
+        <div class="metrics__label" data-i18n="metrics.brand">Unified brand system across every product surface</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-/* Hero console mock */
-.console {
-  position: relative;
-  background: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 22px;
-  box-shadow: var(--shadow-lg);
-  overflow: hidden;
-}
-.console::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--card-glow);
-  pointer-events: none;
-}
-.console__head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-bottom: 14px;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 18px;
-  position: relative;
-}
-.console__title {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--font-mono);
-  font-size: 11.5px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-2);
-}
-.console__title strong { color: var(--text); font-weight: 600; }
-.console__dots { display: flex; gap: 6px; }
-.console__dots span {
-  width: 8px; height: 8px; border-radius: 999px;
-  background: var(--border-strong);
-}
-.console__dots span:first-child { background: var(--gold); }
-.console__body {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  position: relative;
-}
-.stat {
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 14px;
-  position: relative;
-  overflow: hidden;
-}
-.stat__label {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-3);
-  margin-bottom: 8px;
-}
-.stat__value {
-  font-family: var(--font-mono);
-  font-size: 26px;
-  color: var(--text);
-  font-weight: 500;
-  letter-spacing: -0.01em;
-}
-.stat__delta {
-  margin-top: 6px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--success);
-  letter-spacing: 0.06em;
-}
-.stat__delta--neg { color: var(--danger); }
-.stat__delta--flat { color: var(--text-2); }
+<!-- ================= PLATFORMS ================= -->
+<section class="section" id="platforms">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div class="section-head__row">
+        <div>
+          <span class="eyebrow"><span data-i18n="platforms.eyebrow">Pillars</span></span>
+          <h2 class="h2" style="margin-top: 18px;">Five practice pillars.<br>
+            <span class="serif" style="color: var(--gold-light);">One shared spine.</span></h2>
+        </div>
+        <p class="lead" style="max-width: 42ch;">
+          Every pillar inherits the same design language, data model and disclaimers.
+          Learn one module; you already know the rest.
+        </p>
+      </div>
+      <hr class="hairline">
+    </div>
 
-.console__row {
-  margin-top: 14px;
-  border-top: 1px solid var(--border);
-  padding-top: 14px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-.console__list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.console__list-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 12.5px;
-  color: var(--text-2);
-  padding: 8px 10px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-}
-.console__list-item strong {
-  color: var(--text);
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.06em;
-}
+    <div class="pillars">
+      <!-- 01 Intelligence -->
+      <article class="pillar" data-reveal>
+        <div class="pillar__head">
+          <div class="pillar__meta">
+            <span class="badge badge--live"><span class="badge__dot"></span>Live</span>
+            <span class="mono">3 modules</span>
+          </div>
+        </div>
+        <h3 class="pillar__title">Intelligence</h3>
+        <p class="pillar__desc">Market, gold and applied AI research — turned into planners, calculators and reference feeds you can actually act on.</p>
+        <ul class="pillar__submodules">
+          <li><span class="pillar__sub-num">1.1</span><span class="pillar__sub-name">Gold Intelligence</span><span class="badge badge--live" style="padding:2px 8px;">Live</span></li>
+          <li><span class="pillar__sub-num">1.2</span><span class="pillar__sub-name">Market Intelligence</span><span class="badge badge--soon" style="padding:2px 8px;">Q4 2026</span></li>
+          <li><span class="pillar__sub-num">1.3</span><span class="pillar__sub-name">AI Research</span><span class="badge badge--beta" style="padding:2px 8px;">Beta</span></li>
+        </ul>
+        <div class="pillar__preview">
+          <div class="mock-grid">
+            <div class="mock-cell">Gold / oz<strong>2,384</strong></div>
+            <div class="mock-cell">24K / g<strong>287.6</strong></div>
+            <div class="mock-cell">Premium<strong>3.4%</strong></div>
+            <div class="mock-cell">Entry<strong style="color: var(--success);">Good</strong></div>
+          </div>
+        </div>
+        <a href="#intelligence" class="pillar__cta">Launch Gold Intelligence <span>→</span></a>
+      </article>
 
-/* Sparkline / mini chart */
-.mini-chart {
-  height: 100%;
-  min-height: 84px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.mini-chart__label {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  color: var(--text-3);
-  text-transform: uppercase;
-}
-.mini-chart svg { width: 100%; height: 40px; }
-.mini-chart__value {
-  font-family: var(--font-mono);
-  font-size: 14px;
-  color: var(--gold-light);
-}
-[data-mode="light"] .mini-chart__value { color: var(--gold-deep); }
+      <!-- 02 Governance -->
+      <article class="pillar" data-reveal>
+        <div class="pillar__head">
+          <div class="pillar__meta">
+            <span class="badge badge--soon"><span class="badge__dot"></span>Coming Soon</span>
+            <span class="mono">5 modules</span>
+          </div>
+        </div>
+        <h3 class="pillar__title">Governance</h3>
+        <p class="pillar__desc">Enterprise access governance, internal audit, compliance and enterprise risk — reframed as instruments a working risk officer would use on a Monday morning.</p>
+        <ul class="pillar__submodules">
+          <li><span class="pillar__sub-num">2.1</span><span class="pillar__sub-name">GRC Professional</span><span class="badge badge--soon" style="padding:2px 8px;">Q3 2026</span></li>
+          <li><span class="pillar__sub-num">2.2</span><span class="pillar__sub-name">Delegation of Authority</span><span class="badge badge--soon" style="padding:2px 8px;">Q3 2026</span></li>
+          <li><span class="pillar__sub-num">2.3</span><span class="pillar__sub-name">Internal Audit</span><span class="badge" style="padding:2px 8px;">Q4 2026</span></li>
+          <li><span class="pillar__sub-num">2.4</span><span class="pillar__sub-name">Compliance</span><span class="badge" style="padding:2px 8px;">Q1 2027</span></li>
+          <li><span class="pillar__sub-num">2.5</span><span class="pillar__sub-name">Risk Management</span><span class="badge" style="padding:2px 8px;">Q1 2027</span></li>
+        </ul>
+        <a href="#governance" class="pillar__cta">Preview Governance teaser <span>→</span></a>
+      </article>
 
-/* ---------- Metric bar ---------- */
-.metrics {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  border-top: 1px solid var(--hairline);
-  border-bottom: 1px solid var(--hairline);
-  margin-top: 40px;
-}
-.metrics__cell {
-  padding: 26px var(--content-px);
-  border-inline-end: 1px solid var(--hairline-soft);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.metrics__cell:last-child { border-inline-end: 0; }
-.metrics__value {
-  font-family: var(--font-mono);
-  font-size: clamp(28px, 3vw, 42px);
-  color: var(--text);
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  line-height: 1;
-}
-.metrics__label {
-  font-size: 13.5px;
-  color: var(--text-2);
-  max-width: 30ch;
-  line-height: 1.4;
-}
-@media (max-width: 780px) {
-  .metrics { grid-template-columns: repeat(2, 1fr); }
-  .metrics__cell:nth-child(2) { border-inline-end: 0; }
-  .metrics__cell:nth-child(1), .metrics__cell:nth-child(2) { border-bottom: 1px solid var(--hairline-soft); }
-}
+      <!-- 03 Business -->
+      <article class="pillar" data-reveal>
+        <div class="pillar__head">
+          <div class="pillar__meta">
+            <span class="badge badge--future"><span class="badge__dot"></span>Future</span>
+            <span class="mono">5 modules</span>
+          </div>
+        </div>
+        <h3 class="pillar__title">Business</h3>
+        <p class="pillar__desc">Executive dashboards, KPI trackers and strategic decision engines. For leaders who need to convert uncertainty into direction — fast.</p>
+        <ul class="pillar__submodules">
+          <li><span class="pillar__sub-num">3.1</span><span class="pillar__sub-name">Consulting</span><span class="badge" style="padding:2px 8px;">Roadmap</span></li>
+          <li><span class="pillar__sub-num">3.2</span><span class="pillar__sub-name">Strategy</span><span class="badge" style="padding:2px 8px;">Roadmap</span></li>
+          <li><span class="pillar__sub-num">3.3</span><span class="pillar__sub-name">Operating Model</span><span class="badge" style="padding:2px 8px;">Roadmap</span></li>
+          <li><span class="pillar__sub-num">3.4</span><span class="pillar__sub-name">Digital Transformation</span><span class="badge" style="padding:2px 8px;">Roadmap</span></li>
+          <li><span class="pillar__sub-num">3.5</span><span class="pillar__sub-name">Performance</span><span class="badge" style="padding:2px 8px;">Roadmap</span></li>
+        </ul>
+        <a href="#business" class="pillar__cta">Preview Business <span>→</span></a>
+      </article>
 
-/* ---------- Platform pillars grid ---------- */
-.pillars {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
-.pillar {
-  position: relative;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 28px;
-  overflow: hidden;
-  transition: border-color .3s, transform .3s var(--ease-out);
-  display: flex;
-  flex-direction: column;
-  min-height: 460px;
-}
-.pillar::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--card-glow);
-  opacity: 0;
-  transition: opacity .4s var(--ease-out);
-  pointer-events: none;
-}
-.pillar:hover { border-color: var(--hairline); transform: translateY(-2px); }
-.pillar:hover::before { opacity: 1; }
-.pillar__head {
-  display: flex;
-  justify-content: flex-end;
-  align-items: start;
-  gap: 12px;
-  margin-bottom: 24px;
-  position: relative;
-}
-.pillar__meta {
-  text-align: end;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  align-items: end;
-}
-.pillar__title {
-  font-size: 26px;
-  font-weight: 500;
-  letter-spacing: -0.015em;
-  line-height: 1.15;
-  margin: 0 0 10px;
-  position: relative;
-}
-.pillar__desc {
-  color: var(--text-2);
-  font-size: 15px;
-  line-height: 1.5;
-  margin: 0;
-  max-width: 44ch;
-  position: relative;
-}
-.pillar__tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin: 18px 0;
-  position: relative;
-}
-.tag {
-  padding: 4px 10px;
-  border-radius: 4px;
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  font-size: 11.5px;
-  font-family: var(--font-mono);
-  letter-spacing: 0.06em;
-  color: var(--text-2);
-}
-.pillar__preview {
-  margin-top: auto;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 14px;
-  position: relative;
-  min-height: 140px;
-}
-.pillar__cta--soon {
-  opacity: 0.55;
-  cursor: default;
-  pointer-events: none;
-}
-.pillar__cta {
-  margin-top: 20px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--gold);
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-weight: 500;
-  transition: gap .2s var(--ease-out);
-  position: relative;
-}
-.pillar__cta:hover { gap: 14px; }
-[data-mode="light"] .pillar__cta { color: var(--gold-deep); }
+      <!-- 04 Venture -->
+      <article class="pillar" data-reveal>
+        <div class="pillar__head">
+          <div class="pillar__meta">
+            <span class="badge badge--future"><span class="badge__dot"></span>Future</span>
+            <span class="mono">4 modules</span>
+          </div>
+        </div>
+        <h3 class="pillar__title">Venture</h3>
+        <p class="pillar__desc">A founder's operating console — entrepreneurship, MVP framing, funding readiness and scaling math. Built by someone who has done it, not written about it.</p>
+        <ul class="pillar__submodules">
+          <li><span class="pillar__sub-num">4.1</span><span class="pillar__sub-name">Entrepreneurship</span><span class="badge" style="padding:2px 8px;">Roadmap</span></li>
+          <li><span class="pillar__sub-num">4.2</span><span class="pillar__sub-name">Startup Builder</span><span class="badge" style="padding:2px 8px;">Roadmap</span></li>
+          <li><span class="pillar__sub-num">4.3</span><span class="pillar__sub-name">Funding</span><span class="badge" style="padding:2px 8px;">Roadmap</span></li>
+          <li><span class="pillar__sub-num">4.4</span><span class="pillar__sub-name">Scaling</span><span class="badge" style="padding:2px 8px;">Roadmap</span></li>
+        </ul>
+        <a href="#venture" class="pillar__cta">Preview Venture <span>→</span></a>
+      </article>
 
-@media (max-width: 900px) {
-  .pillars { grid-template-columns: 1fr; }
-  .pillar { min-height: 0; }
-}
+      <!-- 05 AI -->
+      <article class="pillar" data-reveal>
+        <div class="pillar__head">
+          <div class="pillar__meta">
+            <span class="badge badge--future"><span class="badge__dot"></span>Future</span>
+            <span class="mono">4 modules</span>
+          </div>
+        </div>
+        <h3 class="pillar__title">AI</h3>
+        <p class="pillar__desc">Domain advisors — Gold AI, GRC AI, Business AI, Venture AI — grounded in the same knowledge base powering every pillar. Not chatbots. Reasoning surfaces.</p>
+        <ul class="pillar__submodules">
+          <li><span class="pillar__sub-num">5.1</span><span class="pillar__sub-name">Gold AI</span><span class="badge" style="padding:2px 8px;">Roadmap</span></li>
+          <li><span class="pillar__sub-num">5.2</span><span class="pillar__sub-name">GRC AI</span><span class="badge" style="padding:2px 8px;">Roadmap</span></li>
+          <li><span class="pillar__sub-num">5.3</span><span class="pillar__sub-name">Business AI</span><span class="badge" style="padding:2px 8px;">Roadmap</span></li>
+          <li><span class="pillar__sub-num">5.4</span><span class="pillar__sub-name">Venture AI</span><span class="badge" style="padding:2px 8px;">Roadmap</span></li>
+        </ul>
+        <div class="pillar__preview" style="display: grid; gap: 8px; padding: 12px;">
+          <div class="console__list-item" style="background: var(--surface); font-size: 12px;">
+            <span style="color: var(--gold);">›</span> <span>What's the SoD conflict for FI-CO role bundle?</span> <strong style="color:var(--success)">▲</strong>
+          </div>
+          <div class="console__list-item" style="background: var(--surface-2); font-size: 11.5px; color: var(--text-3);">
+            <em>Analyzing · 2 conflicts detected in transaction group FB60 ↔ MIRO...</em>
+          </div>
+        </div>
+        <a href="#ai" class="pillar__cta">Preview AI <span>→</span></a>
+      </article>
 
-/* Pillar preview mocks (per-pillar variants) */
-.mock-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-}
-.mock-cell {
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 8px;
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  color: var(--text-3);
-  letter-spacing: 0.06em;
-}
-.mock-cell strong {
-  display: block;
-  font-size: 15px;
-  color: var(--text);
-  letter-spacing: -0.01em;
-  margin-top: 4px;
-  font-weight: 500;
-}
-.mock-bar {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 10px;
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  margin-top: 6px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--text-2);
-}
-.mock-bar__prog {
-  flex: 1;
-  height: 4px;
-  background: var(--border);
-  border-radius: 2px;
-  overflow: hidden;
-  position: relative;
-}
-.mock-bar__prog::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  width: var(--v, 60%);
-  background: linear-gradient(90deg, var(--gold-deep), var(--gold));
-  border-radius: 2px;
-}
+      <!-- 06 Research + Resources + About : flat pillars -->
+      <article class="pillar pillar--flat" data-reveal>
+        <div class="pillar__head">
+          <div class="pillar__meta">
+            <span class="badge badge--beta"><span class="badge__dot"></span>Beta v1</span>
+            <span class="mono">Rolling</span>
+          </div>
+        </div>
+        <h3 class="pillar__title">Research · Resources · About</h3>
+        <p class="pillar__desc">Applied frameworks, working papers, downloadable toolkits — and the story behind why GRC Forge exists.</p>
+        <ul class="pillar__submodules">
+          <li><span class="pillar__sub-num">→</span><span class="pillar__sub-name">Research Hub — 24 publications</span><a href="#research" class="pillar__sub-link">Browse →</a></li>
+          <li><span class="pillar__sub-num">→</span><span class="pillar__sub-name">Resources — templates &amp; toolkits</span><a href="#resources" class="pillar__sub-link">Open →</a></li>
+          <li><span class="pillar__sub-num">→</span><span class="pillar__sub-name">About — mission &amp; principles</span><a href="#about" class="pillar__sub-link">Read →</a></li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
 
-/* ---------- Featured (Gold Intelligence) ---------- */
-.featured {
-  position: relative;
-}
-.featured__header {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: end;
-  gap: 32px;
-  margin-bottom: 44px;
-}
-@media (max-width: 780px) {
-  .featured__header { grid-template-columns: 1fr; }
-}
+<!-- ================= INTELLIGENCE : featured module = Gold Intelligence ================= -->
+<section class="section" id="intelligence">
+  <div class="container">
+    <div class="featured__header" data-reveal>
+      <div>
+        <span class="eyebrow"><span data-i18n="gold.eyebrow">Intelligence · Gold Intelligence</span></span>
+        <h2 class="h2" style="margin-top: 18px;">Gold, <span class="serif" style="color: var(--gold-light);">without the guesswork.</span></h2>
+        <p class="lead" style="margin-top: 20px;">
+          The Investment Planner turns your budget, horizon and risk appetite into a concrete
+          allocation, three scenarios and a break-even. Move the sliders — it recalculates live.
+        </p>
+        <a href="#gold-planner" class="btn" style="margin-top: 24px;" data-i18n="gold.cta">
+          Open the Gold Planner <span class="btn__arrow">↓</span>
+        </a>
+      </div>
+      <div style="display:flex; gap: 8px; flex-wrap: wrap;">
+        <span class="badge badge--live"><span class="badge__dot"></span>MVP</span>
+        <span class="badge">Educational only</span>
+        <span class="badge">Not financial advice</span>
+      </div>
+    </div>
 
-.planner {
-  background: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  box-shadow: var(--shadow-lg);
-}
-.planner__head {
-  padding: 20px 28px;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  background: var(--surface);
-}
-.planner__title {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.planner__title strong {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text);
-}
-.planner__title span {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--text-3);
-  letter-spacing: 0.14em;
-}
-.planner__body {
-  display: grid;
-  grid-template-columns: 380px 1fr;
-  gap: 0;
-  min-height: 520px;
-}
-@media (max-width: 900px) {
-  .planner__body { grid-template-columns: 1fr; }
-}
-.planner__inputs {
-  padding: 32px 28px;
-  border-inline-end: 1px solid var(--border);
-  background: var(--bg);
-}
-@media (max-width: 900px) {
-  .planner__inputs { border-inline-end: 0; border-bottom: 1px solid var(--border); }
-}
-.planner__outputs {
-  padding: 32px 28px;
-  display: grid;
-  gap: 20px;
-  align-content: start;
-}
+    <!-- ============ PLANNER ============ -->
+    <div class="planner" id="gold-planner" data-reveal>
+      <div class="planner__head">
+        <div class="planner__title">
+          <span class="console__dots"><span></span><span></span><span></span></span>
+          <strong>GOLD · INVESTMENT PLANNER</strong>
+          <span>/ v1.0 MVP</span>
+        </div>
+        <div style="display: flex; gap: 20px; align-items: center;">
+          <span class="mono"><span style="color: var(--success)">●</span> Live reference · 24K SAR/g <strong id="ref-price" style="color: var(--text);">287.60</strong></span>
+        </div>
+      </div>
 
-.field { margin-bottom: 24px; }
-.field:last-child { margin-bottom: 0; }
-.field__label {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 10px;
-}
-.field__label span {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-2);
-}
-.field__label strong {
-  font-family: var(--font-mono);
-  font-size: 14px;
-  color: var(--gold);
-  font-weight: 500;
-}
-[data-mode="light"] .field__label strong { color: var(--gold-deep); }
+      <div class="planner__body">
+        <!-- Inputs -->
+        <div class="planner__inputs">
 
-.slider {
-  --v: 50%;
-  width: 100%;
-  -webkit-appearance: none;
-  appearance: none;
-  height: 4px;
-  background: linear-gradient(90deg, var(--gold) 0%, var(--gold) var(--v), var(--border) var(--v), var(--border) 100%);
-  border-radius: 999px;
-  outline: none;
-  cursor: pointer;
-}
-[dir="rtl"] .slider {
-  background: linear-gradient(-90deg, var(--gold) 0%, var(--gold) var(--v), var(--border) var(--v), var(--border) 100%);
-}
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 18px; height: 18px;
-  border-radius: 999px;
-  background: var(--gold);
-  border: 3px solid var(--bg);
-  box-shadow: 0 0 0 1px var(--gold), 0 4px 10px rgba(0,0,0,0.4);
-  cursor: grab;
-  transition: transform .18s var(--ease-out);
-}
-.slider::-webkit-slider-thumb:hover { transform: scale(1.15); }
-.slider::-moz-range-thumb {
-  width: 14px; height: 14px;
-  border-radius: 999px;
-  background: var(--gold);
-  border: 3px solid var(--bg);
-  cursor: grab;
-}
+          <div class="field">
+            <div class="field__label">
+              <span>Investment amount</span>
+              <strong id="amount-label">100,000 SAR</strong>
+            </div>
+            <input type="range" id="amount" class="slider" min="5000" max="1000000" step="5000" value="100000">
+            <div style="display:flex; justify-content: space-between; margin-top: 8px;" class="mono">
+              <span>5,000</span><span>1,000,000</span>
+            </div>
+          </div>
 
-.segmented {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 1fr;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  overflow: hidden;
-  background: var(--surface);
-}
-.segmented button {
-  padding: 10px 8px;
-  font-family: var(--font-mono);
-  font-size: 11.5px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-2);
-  border-inline-end: 1px solid var(--border);
-  transition: color .2s, background .2s;
-}
-.segmented button:last-child { border-inline-end: 0; }
-.segmented button:hover { color: var(--text); }
-.segmented button[aria-pressed="true"] {
-  background: var(--surface-2);
-  color: var(--gold);
-  box-shadow: inset 0 -2px 0 var(--gold);
-}
-[data-mode="light"] .segmented button[aria-pressed="true"] { color: var(--gold-deep); box-shadow: inset 0 -2px 0 var(--gold-deep); }
+          <div class="field">
+            <div class="field__label">
+              <span>Time horizon</span>
+              <strong id="horizon-label">5 years</strong>
+            </div>
+            <input type="range" id="horizon" class="slider" min="1" max="20" step="1" value="5">
+            <div style="display:flex; justify-content: space-between; margin-top: 8px;" class="mono">
+              <span>1Y</span><span>20Y</span>
+            </div>
+          </div>
 
-.result-grid {
-  display: grid;
-  grid-template-columns: 260px 1fr;
-  gap: 20px;
-}
-@media (max-width: 1080px) {
-  .result-grid { grid-template-columns: 1fr; }
-}
-.result-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 18px;
-  position: relative;
-  overflow: hidden;
-}
-.result-card__label {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-3);
-  margin-bottom: 8px;
-}
-.result-card__value {
-  font-family: var(--font-mono);
-  font-size: 32px;
-  color: var(--text);
-  font-weight: 500;
-  letter-spacing: -0.02em;
-}
-.result-card__unit {
-  font-size: 14px;
-  color: var(--text-2);
-  margin-inline-start: 4px;
-}
+          <div class="field">
+            <div class="field__label">
+              <span>Risk profile</span>
+              <strong id="risk-label">Balanced</strong>
+            </div>
+            <div class="segmented" id="risk-seg">
+              <button data-val="conservative">Conservative</button>
+              <button data-val="balanced" aria-pressed="true">Balanced</button>
+              <button data-val="aggressive">Aggressive</button>
+            </div>
+          </div>
 
-.scenarios {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-.scenario {
-  padding: 14px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--surface);
-}
-.scenario__name {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-3);
-  margin-bottom: 6px;
-}
-.scenario__value {
-  font-family: var(--font-mono);
-  font-size: 20px;
-  color: var(--text);
-  font-weight: 500;
-}
-.scenario--worst .scenario__value { color: var(--danger); }
-.scenario--best .scenario__value { color: var(--success); }
-.scenario__pct {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  margin-top: 4px;
-  color: var(--text-2);
-}
+          <div class="field">
+            <div class="field__label">
+              <span>Entry timing</span>
+              <strong id="entry-label">Immediate</strong>
+            </div>
+            <div class="segmented" id="entry-seg">
+              <button data-val="immediate" aria-pressed="true">Immediate</button>
+              <button data-val="staggered">Staggered · 6mo</button>
+              <button data-val="dca">DCA · 12mo</button>
+            </div>
+          </div>
 
-.disclaimer {
-  padding: 14px 16px;
-  border-radius: 8px;
-  background: var(--surface);
-  border: 1px dashed var(--border-strong);
-  font-size: 12.5px;
-  color: var(--text-2);
-  line-height: 1.5;
-  display: flex;
-  gap: 10px;
-  align-items: start;
-}
-.disclaimer strong { color: var(--warning); font-weight: 600; }
+          <div class="disclaimer">
+            <strong>⚠</strong>
+            <span>Reference values only. Simulated on a hardcoded 24K SAR/gram reference price. Not investment advice — consult a licensed advisor.</span>
+          </div>
+        </div>
 
-.donut-block {
-  display: grid;
-  grid-template-columns: 180px 1fr;
-  gap: 20px;
-  align-items: center;
-}
-@media (max-width: 480px) {
-  .donut-block { grid-template-columns: 1fr; }
-}
-.donut { position: relative; }
-.donut svg { width: 100%; height: auto; display: block; }
-.donut__center {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-.donut__center strong {
-  font-family: var(--font-mono);
-  font-size: 32px;
-  color: var(--text);
-  font-weight: 500;
-  letter-spacing: -0.02em;
-}
-.donut__center span {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-3);
-}
-.legend { display: grid; gap: 10px; }
-.legend__item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 13px;
-  color: var(--text-2);
-}
-.legend__swatch {
-  width: 10px;
-  height: 10px;
-  border-radius: 3px;
-}
-.legend__value {
-  margin-inline-start: auto;
-  font-family: var(--font-mono);
-  color: var(--text);
-  font-size: 13px;
-}
+        <!-- Outputs -->
+        <div class="planner__outputs">
 
-.chart-line {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 18px;
-}
-.chart-line__head {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
-.chart-line__title {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-2);
-}
-.chart-line__legend {
-  display: flex;
-  gap: 12px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--text-3);
-}
-.chart-line__legend span::before {
-  content: "";
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 2px;
-  margin-inline-end: 6px;
-  vertical-align: middle;
-}
-.chart-line__legend .l-best::before { background: var(--success); }
-.chart-line__legend .l-base::before { background: var(--gold); }
-.chart-line__legend .l-worst::before { background: var(--danger); }
+          <div class="result-grid">
+            <div class="result-card">
+              <div class="result-card__label">Suggested gold allocation</div>
+              <div class="result-card__value"><span id="alloc-pct">25</span><span class="result-card__unit">%</span></div>
+              <div class="mono" style="margin-top: 6px; color: var(--text-2)">of your portfolio</div>
+            </div>
 
-/* ---------- Coming soon cards row (Gold roadmap) ---------- */
-.futures {
-  margin-top: 40px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-}
-@media (max-width: 780px) { .futures { grid-template-columns: repeat(2, 1fr); } }
-.future {
-  padding: 20px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  transition: border-color .3s;
-}
-.future:hover { border-color: var(--hairline); }
-.future__icon {
-  width: 32px; height: 32px;
-  border-radius: 6px;
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 14px;
-  color: var(--gold);
-}
-[data-mode="light"] .future__icon { color: var(--gold-deep); }
-.future__title {
-  font-size: 15px;
-  font-weight: 500;
-  margin-bottom: 6px;
-  letter-spacing: -0.01em;
-}
-.future__desc {
-  color: var(--text-3);
-  font-size: 12.5px;
-  line-height: 1.5;
-}
+            <div class="donut-block">
+              <div class="donut">
+                <svg viewBox="0 0 120 120">
+                  <circle cx="60" cy="60" r="46" fill="none" stroke="var(--surface-3)" stroke-width="12"/>
+                  <circle id="donut-arc" cx="60" cy="60" r="46" fill="none" stroke="var(--gold)"
+                          stroke-width="12" stroke-linecap="butt"
+                          transform="rotate(-90 60 60)"
+                          stroke-dasharray="72 289" stroke-dashoffset="0"/>
+                </svg>
+                <div class="donut__center">
+                  <strong id="alloc-grams">87</strong>
+                  <span>grams · 24K</span>
+                </div>
+              </div>
+              <div class="legend">
+                <div class="legend__item">
+                  <span class="legend__swatch" style="background: var(--gold);"></span>
+                  Gold allocation
+                  <span class="legend__value" id="legend-gold">25,000 SAR</span>
+                </div>
+                <div class="legend__item">
+                  <span class="legend__swatch" style="background: var(--surface-3);"></span>
+                  Other assets
+                  <span class="legend__value" id="legend-other">75,000 SAR</span>
+                </div>
+                <div class="legend__item">
+                  <span class="legend__swatch" style="background: transparent; border: 1px dashed var(--border-strong);"></span>
+                  Break-even entry
+                  <span class="legend__value" id="legend-breakeven">297.66 SAR/g</span>
+                </div>
+              </div>
+            </div>
+          </div>
 
-/* ---------- GRC dashboard mock ---------- */
-.grc-dashboard {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow);
-}
-.grc-dashboard__head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 24px;
-  border-bottom: 1px solid var(--border);
-  background: var(--bg);
-}
-.grc-dashboard__body {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0;
-  border-bottom: 1px solid var(--border);
-}
-.grc-stat {
-  padding: 22px 24px;
-  border-inline-end: 1px solid var(--border);
-}
-.grc-stat:last-child { border-inline-end: 0; }
-.grc-stat__label {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-3);
-  margin-bottom: 8px;
-}
-.grc-stat__value {
-  font-family: var(--font-mono);
-  font-size: 28px;
-  color: var(--text);
-  font-weight: 500;
-}
-.grc-stat__meta {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--text-2);
-  margin-top: 4px;
-}
-.grc-tables {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  min-height: 260px;
-}
-@media (max-width: 900px) {
-  .grc-tables { grid-template-columns: 1fr; }
-  .grc-dashboard__body { grid-template-columns: repeat(2, 1fr); }
-  .grc-stat:nth-child(2) { border-inline-end: 0; }
-  .grc-stat:nth-child(1), .grc-stat:nth-child(2) { border-bottom: 1px solid var(--border); }
-}
-.grc-table {
-  padding: 20px 24px;
-  border-inline-end: 1px solid var(--border);
-}
-.grc-table:last-child { border-inline-end: 0; }
-.grc-table__row {
-  display: grid;
-  grid-template-columns: 1fr auto auto;
-  gap: 12px;
-  padding: 10px 0;
-  border-bottom: 1px dashed var(--border);
-  font-size: 13.5px;
-  align-items: center;
-}
-.grc-table__row:last-child { border-bottom: 0; }
-.grc-table__row .mono { font-size: 11px; color: var(--text-2); }
+          <div class="chart-line">
+            <div class="chart-line__head">
+              <span class="chart-line__title">3 scenarios · <span id="chart-years">5</span> years</span>
+              <div class="chart-line__legend">
+                <span class="l-worst">Worst</span>
+                <span class="l-base">Base</span>
+                <span class="l-best">Best</span>
+              </div>
+            </div>
+            <svg id="scenario-chart" viewBox="0 0 600 200" preserveAspectRatio="none" style="width:100%; height: 200px;">
+              <!-- populated by JS -->
+            </svg>
+          </div>
 
-.grc-tools {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-top: 32px;
-}
-@media (max-width: 780px) { .grc-tools { grid-template-columns: 1fr; } }
-.grc-tool {
-  padding: 22px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-}
-.grc-tool__num {
-  font-family: var(--font-mono);
-  color: var(--gold);
-  font-size: 13px;
-  margin-bottom: 12px;
-  letter-spacing: 0.14em;
-}
-[data-mode="light"] .grc-tool__num { color: var(--gold-deep); }
-.grc-tool h4 { margin-bottom: 6px; }
-.grc-tool p { margin: 0; color: var(--text-2); font-size: 13.5px; line-height: 1.5; }
+          <div class="scenarios">
+            <div class="scenario scenario--worst">
+              <div class="scenario__name">Worst · –12%</div>
+              <div class="scenario__value" id="scenario-worst">22,000</div>
+              <div class="scenario__pct" id="scenario-worst-pct">–12.0% · 3,300 SAR loss</div>
+            </div>
+            <div class="scenario">
+              <div class="scenario__name">Base · +38%</div>
+              <div class="scenario__value" id="scenario-base">34,500</div>
+              <div class="scenario__pct" id="scenario-base-pct">+38.0% · 9,500 SAR gain</div>
+            </div>
+            <div class="scenario scenario--best">
+              <div class="scenario__name">Best · +82%</div>
+              <div class="scenario__value" id="scenario-best">45,500</div>
+              <div class="scenario__pct" id="scenario-best-pct">+82.0% · 20,500 SAR gain</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-/* ---------- Research Hub ---------- */
-.research-cats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 32px;
-}
-.research-cat {
-  padding: 8px 16px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.06em;
-  color: var(--text-2);
-  transition: all .2s;
-}
-.research-cat:hover { border-color: var(--hairline); color: var(--text); }
-.research-cat.is-active {
-  background: var(--surface-2);
-  color: var(--gold);
-  border-color: var(--hairline);
-}
-[data-mode="light"] .research-cat.is-active { color: var(--gold-deep); }
+    <!-- Roadmap / future tools -->
+    <div class="futures" data-reveal>
+      <div class="future">
+        <div class="future__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></div>
+        <div class="future__title">Live price widget</div>
+        <div class="future__desc">Real-time XAU/USD &amp; SAR/g feed with alerts. Q3 2026.</div>
+      </div>
+      <div class="future">
+        <div class="future__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg></div>
+        <div class="future__title">Portfolio tracking</div>
+        <div class="future__desc">Multi-position tracker with cost basis and premium roll-up.</div>
+      </div>
+      <div class="future">
+        <div class="future__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v20M2 12h20"/></svg></div>
+        <div class="future__title">VAT &amp; premium calculator</div>
+        <div class="future__desc">Country-aware break-even math incl. VAT and dealer premium.</div>
+      </div>
+      <div class="future">
+        <div class="future__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg></div>
+        <div class="future__title">Gold AI advisor</div>
+        <div class="future__desc">Ask questions grounded in market context and your positions.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-.research-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-@media (max-width: 960px) { .research-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 620px) { .research-grid { grid-template-columns: 1fr; } }
+<!-- ================= GOVERNANCE TEASER ================= -->
+<section class="section" id="governance" style="background: linear-gradient(180deg, transparent 0%, var(--bg-elev) 30%, var(--bg-elev) 70%, transparent 100%);">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div class="section-head__row">
+        <div>
+          <span class="eyebrow">Governance · GRC Professional</span>
+          <h2 class="h2" style="margin-top: 18px;">Governance,<br><span class="serif" style="color: var(--gold-light);">without the ceremony.</span></h2>
+        </div>
+        <p class="lead" style="max-width: 44ch;">
+          Delegation of authority, internal audit, compliance, risk management. Reframed as
+          instruments a working risk officer would actually use on a Monday morning.
+        </p>
+      </div>
+      <hr class="hairline">
+    </div>
 
-.research {
-  padding: 24px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  transition: border-color .3s, transform .3s var(--ease-out);
-  min-height: 260px;
-}
-.research:hover { border-color: var(--hairline); transform: translateY(-2px); }
-.research__meta {
-  display: flex;
-  justify-content: space-between;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--text-3);
-  letter-spacing: 0.06em;
-}
-.research__title {
-  font-size: 20px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  line-height: 1.25;
-  margin: 0;
-  text-wrap: balance;
-}
-.research__brief {
-  color: var(--text-2);
-  font-size: 14px;
-  line-height: 1.55;
-  margin: 0;
-  flex: 1;
-}
-.research__tags {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-}
+    <!-- Dashboard mock -->
+    <div class="grc-dashboard" data-reveal>
+      <div class="grc-dashboard__head">
+        <div class="planner__title">
+          <span class="console__dots"><span></span><span></span><span></span></span>
+          <strong>GOVERNANCE · CONTROL PLANE</strong>
+          <span>/ demo</span>
+        </div>
+        <span class="mono" style="color: var(--warning);">● PREVIEW · not connected</span>
+      </div>
+      <div class="grc-dashboard__body">
+        <div class="grc-stat">
+          <div class="grc-stat__label">Risk score</div>
+          <div class="grc-stat__value">18</div>
+          <div class="grc-stat__meta" style="color:var(--success)">▼ –3 this week</div>
+        </div>
+        <div class="grc-stat">
+          <div class="grc-stat__label">Open issues</div>
+          <div class="grc-stat__value">24</div>
+          <div class="grc-stat__meta" style="color:var(--warning)">6 aging &gt; 30d</div>
+        </div>
+        <div class="grc-stat">
+          <div class="grc-stat__label">Compliance</div>
+          <div class="grc-stat__value">92%</div>
+          <div class="grc-stat__meta">Target: 95%</div>
+        </div>
+        <div class="grc-stat">
+          <div class="grc-stat__label">Controls</div>
+          <div class="grc-stat__value">134</div>
+          <div class="grc-stat__meta">128 automated · 6 manual</div>
+        </div>
+      </div>
+      <div class="grc-tables">
+        <div class="grc-table">
+          <h4 class="h4" style="margin-bottom: 14px;">Approval workflow</h4>
+          <div class="grc-table__row"><span>User access request · IT-Admin bundle</span><span class="mono">Rev 2/3</span><span class="badge badge--soon" style="padding: 2px 8px;">In review</span></div>
+          <div class="grc-table__row"><span>Policy exception · vendor-master</span><span class="mono">SLA 4d</span><span class="badge" style="padding: 2px 8px;">Pending</span></div>
+          <div class="grc-table__row"><span>Role change · FI Controller</span><span class="mono">v3.1</span><span class="badge badge--live" style="padding: 2px 8px;">Approved</span></div>
+          <div class="grc-table__row"><span>Control test · SoD payables↔procurement</span><span class="mono">Auto</span><span class="badge badge--live" style="padding: 2px 8px;">Active</span></div>
+        </div>
+        <div class="grc-table">
+          <h4 class="h4" style="margin-bottom: 14px;">Risk heat</h4>
+          <div class="grc-table__row"><span>Segregation of duties</span><span class="mono">high</span><span style="color: var(--danger); font-family: var(--font-mono); font-size: 12px;">■■■■</span></div>
+          <div class="grc-table__row"><span>Vendor master data</span><span class="mono">med</span><span style="color: var(--warning); font-family: var(--font-mono); font-size: 12px;">■■■</span></div>
+          <div class="grc-table__row"><span>Delegation of authority</span><span class="mono">med</span><span style="color: var(--warning); font-family: var(--font-mono); font-size: 12px;">■■</span></div>
+          <div class="grc-table__row"><span>Access recertification</span><span class="mono">low</span><span style="color: var(--success); font-family: var(--font-mono); font-size: 12px;">■</span></div>
+        </div>
+      </div>
+    </div>
 
-/* ---------- Why GRC Forge ---------- */
-.why-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-}
-@media (max-width: 900px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 500px) { .why-grid { grid-template-columns: 1fr; } }
-.why {
-  padding: 28px 22px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  position: relative;
-}
-.why__num {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--gold);
-  letter-spacing: 0.14em;
-  margin-bottom: 20px;
-}
-[data-mode="light"] .why__num { color: var(--gold-deep); }
-.why__title {
-  font-size: 18px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  margin: 0 0 8px;
-}
-.why__desc {
-  color: var(--text-2);
-  font-size: 13.5px;
-  line-height: 1.55;
-  margin: 0;
-}
+    <div class="grc-tools" data-reveal>
+      <div class="grc-tool">
+        <div class="grc-tool__num">2.1 · Q3 2026</div>
+        <h4 class="h4">GRC Professional</h4>
+        <p>SoD Analyzer, DoA Builder, Risk Matrix — the three core instruments packaged for enterprise risk teams.</p>
+      </div>
+      <div class="grc-tool">
+        <div class="grc-tool__num">2.2 · Q3 2026</div>
+        <h4 class="h4">Delegation of Authority</h4>
+        <p>Thresholds, approval chains and escalation paths — mapped to real spend and sign-off authority across the org.</p>
+      </div>
+      <div class="grc-tool">
+        <div class="grc-tool__num">2.3 · Q4 2026</div>
+        <h4 class="h4">Internal Audit</h4>
+        <p>Audit universe, sampling plans and workpaper templates — with a live status board for open findings.</p>
+      </div>
+      <div class="grc-tool">
+        <div class="grc-tool__num">2.4 · Q1 2027</div>
+        <h4 class="h4">Compliance</h4>
+        <p>Regulation-to-control mapping with obligation registers and evidence trails — exportable to the auditor's inbox.</p>
+      </div>
+      <div class="grc-tool">
+        <div class="grc-tool__num">2.5 · Q1 2027</div>
+        <h4 class="h4">Risk Management</h4>
+        <p>Enterprise risk register, likelihood × impact matrices and residual-risk deltas after control uplift.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-/* ---------- Updates ---------- */
-.updates {
-  display: grid;
-  gap: 0;
-  border-top: 1px solid var(--border);
-}
-.update {
-  display: grid;
-  grid-template-columns: 180px 1fr auto;
-  gap: 24px;
-  padding: 26px 0;
-  border-bottom: 1px solid var(--border);
-  align-items: start;
-}
-@media (max-width: 780px) {
-  .update { grid-template-columns: 1fr; gap: 8px; }
-}
-.update__date {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--text-3);
-  letter-spacing: 0.06em;
-}
-.update__body h4 { margin: 0 0 6px; font-size: 17px; }
-.update__body p { margin: 0; color: var(--text-2); font-size: 14px; line-height: 1.55; max-width: 62ch; }
+<!-- ================= BUSINESS TEASER ================= -->
+<section class="section" id="business" style="--gold: var(--pillar-business); --gold-light: var(--pillar-business-light); --gold-deep: var(--pillar-business-deep);">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div class="section-head__row">
+        <div>
+          <span class="eyebrow" data-i18n="biz.eyebrow">Business · Decision Engines</span>
+          <h2 class="h2" style="margin-top: 18px;" data-i18n-html="biz.title">Strategy,<br><span class="serif" style="color: var(--gold-light);">without the slideware.</span></h2>
+        </div>
+        <p class="lead" style="max-width: 44ch;" data-i18n="biz.sub">
+          Executive dashboards, KPI trackers and strategic decision engines — for leaders who
+          need to convert uncertainty into direction, fast.
+        </p>
+      </div>
+    </div>
+    <div class="grc-tools" data-reveal>
+      <div class="grc-tool">
+        <div class="grc-tool__num">3.1 · Roadmap</div>
+        <h4 class="h4" data-i18n="biz1.t">Consulting</h4>
+        <p data-i18n="biz1.d">Engagement frameworks, diagnostic toolkits and deliverable templates drawn from real advisory work.</p>
+      </div>
+      <div class="grc-tool">
+        <div class="grc-tool__num">3.2 · Roadmap</div>
+        <h4 class="h4" data-i18n="biz2.t">Strategy</h4>
+        <p data-i18n="biz2.d">Scenario builders and strategic option matrices that turn ambiguity into ranked, defensible choices.</p>
+      </div>
+      <div class="grc-tool">
+        <div class="grc-tool__num">3.3 · Roadmap</div>
+        <h4 class="h4" data-i18n="biz3.t">Operating Model</h4>
+        <p data-i18n="biz3.d">Org design canvases, RACI generators and capability heatmaps for transformation programs.</p>
+      </div>
+      <div class="grc-tool">
+        <div class="grc-tool__num">3.4 · Roadmap</div>
+        <h4 class="h4" data-i18n="biz4.t">Digital Transformation</h4>
+        <p data-i18n="biz4.d">Maturity assessments and roadmap sequencers grounded in what actually ships — not vendor decks.</p>
+      </div>
+      <div class="grc-tool">
+        <div class="grc-tool__num">3.5 · Roadmap</div>
+        <h4 class="h4" data-i18n="biz5.t">Performance</h4>
+        <p data-i18n="biz5.d">KPI trees, executive scorecards and variance narratives that survive the second Tuesday of the quarter.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-/* ---------- CTA Panel ---------- */
-.cta-panel {
-  position: relative;
-  padding: 60px 40px;
-  background:
-    radial-gradient(circle at 20% 100%, rgba(201,163,74,0.15) 0%, transparent 50%),
-    linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  text-align: center;
-}
-.cta-panel__actions {
-  margin-top: 32px;
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
+<!-- ================= VENTURE TEASER ================= -->
+<section class="section" id="venture" style="--gold: var(--pillar-venture); --gold-light: var(--pillar-venture-light); --gold-deep: var(--pillar-venture-deep); background: linear-gradient(180deg, transparent 0%, var(--bg-elev) 30%, var(--bg-elev) 70%, transparent 100%);">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div class="section-head__row">
+        <div>
+          <span class="eyebrow" data-i18n="ven.eyebrow">Venture · Founder Console</span>
+          <h2 class="h2" style="margin-top: 18px;" data-i18n-html="ven.title">Ventures,<br><span class="serif" style="color: var(--gold-light);">without the folklore.</span></h2>
+        </div>
+        <p class="lead" style="max-width: 44ch;" data-i18n="ven.sub">
+          A founder's operating console — from idea to scale, built by someone who has done
+          the work, not written about it.
+        </p>
+      </div>
+    </div>
+    <div class="grc-tools" data-reveal>
+      <div class="grc-tool">
+        <div class="grc-tool__num">4.1 · Roadmap</div>
+        <h4 class="h4" data-i18n="ven1.t">Entrepreneurship</h4>
+        <p data-i18n="ven1.d">Idea-to-thesis worksheets and validation loops built from real founder post-mortems.</p>
+      </div>
+      <div class="grc-tool">
+        <div class="grc-tool__num">4.2 · Roadmap</div>
+        <h4 class="h4" data-i18n="ven2.t">Startup Builder</h4>
+        <p data-i18n="ven2.d">MVP scoping, build-vs-buy calls and launch checklists — one console from first commit to first customer.</p>
+      </div>
+      <div class="grc-tool">
+        <div class="grc-tool__num">4.3 · Roadmap</div>
+        <h4 class="h4" data-i18n="ven3.t">Funding</h4>
+        <p data-i18n="ven3.d">Readiness scorecards, cap table math and investor-meeting prep grounded in fifteen years of teardowns.</p>
+      </div>
+      <div class="grc-tool">
+        <div class="grc-tool__num">4.4 · Roadmap</div>
+        <h4 class="h4" data-i18n="ven4.t">Scaling</h4>
+        <p data-i18n="ven4.d">Unit-economics models, hiring sequencers and the math of growing without breaking.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-/* ---------- Design system doc ---------- */
-.ds-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-}
-@media (max-width: 900px) { .ds-grid { grid-template-columns: 1fr; } }
-.ds-card {
-  padding: 24px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-}
-.ds-card h4 { margin: 0 0 20px; }
-.color-swatch {
-  display: grid;
-  grid-template-columns: 44px 1fr auto;
-  align-items: center;
-  gap: 12px;
-  padding: 8px 0;
-  border-bottom: 1px dashed var(--border);
-}
-.color-swatch:last-child { border-bottom: 0; }
-.color-swatch__chip {
-  width: 44px; height: 32px;
-  border-radius: 6px;
-  border: 1px solid var(--border);
-}
-.color-swatch__name { font-size: 13px; }
-.color-swatch__hex {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--text-2);
-}
-.type-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  padding: 10px 0;
-  border-bottom: 1px dashed var(--border);
-  gap: 20px;
-}
-.type-row:last-child { border-bottom: 0; }
-.type-row__sample { color: var(--text); }
-.type-row__meta {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--text-3);
-  letter-spacing: 0.06em;
-  white-space: nowrap;
-}
+<!-- ================= AI TEASER ================= -->
+<section class="section" id="ai" style="--gold: var(--pillar-ai); --gold-light: var(--pillar-ai-light); --gold-deep: var(--pillar-ai-deep);">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div class="section-head__row">
+        <div>
+          <span class="eyebrow" data-i18n="ais.eyebrow">AI · Reasoning Surfaces</span>
+          <h2 class="h2" style="margin-top: 18px;" data-i18n-html="ais.title">AI,<br><span class="serif" style="color: var(--gold-light);">without the hype.</span></h2>
+        </div>
+        <p class="lead" style="max-width: 44ch;" data-i18n="ais.sub">
+          Domain advisors grounded in the same knowledge base that powers every pillar —
+          they cite their sources and know when to say "I don't know".
+        </p>
+      </div>
+    </div>
+    <div class="grc-tools" data-reveal>
+      <div class="grc-tool">
+        <div class="grc-tool__num">5.1 · Roadmap</div>
+        <h4 class="h4" data-i18n="ai1.t">Gold AI</h4>
+        <p data-i18n="ai1.d">An advisor grounded in market context and your positions — break-even math on demand, sources attached.</p>
+      </div>
+      <div class="grc-tool">
+        <div class="grc-tool__num">5.2 · Roadmap</div>
+        <h4 class="h4" data-i18n="ai2.t">GRC AI</h4>
+        <p data-i18n="ai2.d">SoD conflict answers, control mapping and policy drafting on top of the governance knowledge base.</p>
+      </div>
+      <div class="grc-tool">
+        <div class="grc-tool__num">5.3 · Roadmap</div>
+        <h4 class="h4" data-i18n="ai3.t">Business AI</h4>
+        <p data-i18n="ai3.d">Scenario stress-tests and KPI diagnostics that reason over your operating data, not generic benchmarks.</p>
+      </div>
+      <div class="grc-tool">
+        <div class="grc-tool__num">5.4 · Roadmap</div>
+        <h4 class="h4" data-i18n="ai4.t">Venture AI</h4>
+        <p data-i18n="ai4.d">Funding-readiness reviews and pitch teardowns grounded in the venture playbooks.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-.button-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+<!-- ================= RESEARCH HUB ================= -->
+<section class="section" id="research">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div class="section-head__row">
+        <div>
+          <span class="eyebrow">Research</span>
+          <h2 class="h2" style="margin-top: 18px;">Notes written<br><span class="serif" style="color: var(--gold-light);">to be used.</span></h2>
+        </div>
+        <p class="lead" style="max-width: 42ch;">
+          Applied frameworks, working papers and short-form observations. All English/Arabic.
+          Free to read; expensive to ignore.
+        </p>
+      </div>
+      <hr class="hairline">
+    </div>
 
-/* ---------- Footer ---------- */
-.footer {
-  border-top: 1px solid var(--border);
-  padding: 60px 0 40px;
-  margin-top: 40px;
-}
-.footer__grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 40px;
-  margin-bottom: 40px;
-}
-@media (max-width: 780px) { .footer__grid { grid-template-columns: 1fr 1fr; } }
-.footer__brand {
-  font-family: var(--font-mono);
-  letter-spacing: 0.18em;
-  font-size: 12px;
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.footer__brand-mark {
-  width: 30px;
-  height: 30px;
-  flex-shrink: 0;
-}
-.footer__tag {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 22px;
-  color: var(--text);
-  letter-spacing: -0.01em;
-  max-width: 32ch;
-  line-height: 1.3;
-}
-.footer__col h5 {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-3);
-  margin: 0 0 16px;
-  font-weight: 500;
-}
-.footer__col ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
-.footer__col a { font-size: 14px; color: var(--text-2); transition: color .2s; }
-.footer__col a:hover { color: var(--gold); }
-[data-mode="light"] .footer__col a:hover { color: var(--gold-deep); }
-.footer__bottom {
-  padding-top: 24px;
-  border-top: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--text-3);
-  letter-spacing: 0.06em;
-  flex-wrap: wrap;
-}
+    <div class="research-cats" data-reveal>
+      <button class="research-cat is-active">All · 24</button>
+      <button class="research-cat">Gold · 6</button>
+      <button class="research-cat">Governance · 8</button>
+      <button class="research-cat">Consulting · 5</button>
+      <button class="research-cat">AI · 3</button>
+      <button class="research-cat">Notes · 12</button>
+    </div>
 
-/* ---------- Tweaks panel ---------- */
-.tweaks {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  z-index: 80;
-  width: 300px;
-  background: var(--glass-strong);
-  backdrop-filter: blur(20px) saturate(140%);
-  -webkit-backdrop-filter: blur(20px) saturate(140%);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-lg);
-  padding: 16px;
-  color: var(--text);
-  box-shadow: var(--shadow-lg);
-  transform: translateY(20px) scale(0.98);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .3s var(--ease-out), transform .3s var(--ease-out);
-  font-size: 13px;
-}
-.tweaks.is-open {
-  opacity: 1;
-  transform: none;
-  pointer-events: auto;
-}
-[dir="rtl"] .tweaks { right: auto; left: 20px; }
-.tweaks__head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 14px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--border);
-}
-.tweaks__title {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-2);
-}
-.tweaks__close {
-  color: var(--text-3);
-  transition: color .2s;
-  padding: 4px;
-}
-.tweaks__close:hover { color: var(--text); }
-.tweaks__group { margin-bottom: 14px; }
-.tweaks__group:last-child { margin-bottom: 0; }
-.tweaks__label {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-3);
-  margin-bottom: 8px;
-  display: block;
-}
-.tweak-seg {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 1fr;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  overflow: hidden;
-  background: var(--surface);
-}
-.tweak-seg button {
-  padding: 8px 6px;
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-2);
-  border-inline-end: 1px solid var(--border);
-}
-.tweak-seg button:last-child { border-inline-end: 0; }
-.tweak-seg button[aria-pressed="true"] {
-  background: var(--surface-2);
-  color: var(--gold);
-}
-[data-mode="light"] .tweak-seg button[aria-pressed="true"] { color: var(--gold-deep); }
-.tweak-swatches {
-  display: flex;
-  gap: 8px;
-}
-.tweak-swatch {
-  width: 40px; height: 40px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  cursor: pointer;
-  transition: transform .18s var(--ease-out), border-color .2s;
-  position: relative;
-}
-.tweak-swatch:hover { transform: scale(1.06); }
-.tweak-swatch[aria-pressed="true"] {
-  border-color: var(--text);
-  box-shadow: 0 0 0 2px var(--bg), 0 0 0 3px var(--gold);
-}
+    <div class="research-grid" data-reveal>
+      <a href="#" class="research">
+        <div class="research__meta"><span>PAPER · 18 min</span><span>Jul 2026</span></div>
+        <h3 class="research__title">Gold cycles 2020–2026: what worked, what didn't</h3>
+        <p class="research__brief">Six years of allocation experiments through pandemic, inflation and rate shocks — with the entry rules that would have worked in each regime.</p>
+        <div class="research__tags"><span class="tag">Gold</span><span class="tag">Cycles</span></div>
+      </a>
+      <a href="#" class="research">
+        <div class="research__meta"><span>FRAMEWORK · 9 min</span><span>Jun 2026</span></div>
+        <h3 class="research__title">SoD design patterns for mid-sized ERP tenants</h3>
+        <p class="research__brief">Twelve archetype conflicts and the composite roles that consistently resolve them without paralyzing finance.</p>
+        <div class="research__tags"><span class="tag">GRC</span><span class="tag">ERP</span></div>
+      </a>
+      <a href="#" class="research">
+        <div class="research__meta"><span>NOTE · 4 min</span><span>Jun 2026</span></div>
+        <h3 class="research__title">Executive decision loops · a working diagram</h3>
+        <p class="research__brief">Why most exec dashboards fail on the second Tuesday of the quarter, and a two-layer alternative that survives.</p>
+        <div class="research__tags"><span class="tag">Consulting</span></div>
+      </a>
+      <a href="#" class="research">
+        <div class="research__meta"><span>PAPER · 22 min</span><span>May 2026</span></div>
+        <h3 class="research__title">Delegation-of-Authority as a product surface</h3>
+        <p class="research__brief">Treating DoA as a live app — not a PDF — with typed thresholds, escalation graphs and audit exports.</p>
+        <div class="research__tags"><span class="tag">Governance</span><span class="tag">DoA</span></div>
+      </a>
+      <a href="#" class="research">
+        <div class="research__meta"><span>NOTE · 3 min</span><span>May 2026</span></div>
+        <h3 class="research__title">The 24K premium math nobody teaches</h3>
+        <p class="research__brief">Dealer premium, VAT, spread and refining margin — combined into a single break-even you can carry to a shop.</p>
+        <div class="research__tags"><span class="tag">Gold</span><span class="tag">Retail</span></div>
+      </a>
+      <a href="#" class="research">
+        <div class="research__meta"><span>FRAMEWORK · 12 min</span><span>Apr 2026</span></div>
+        <h3 class="research__title">Founder funding readiness · a 24-point checklist</h3>
+        <p class="research__brief">What we look for before a founder meets money — grounded in fifteen years of teardowns and post-mortems.</p>
+        <div class="research__tags"><span class="tag">Startup</span><span class="tag">Funding</span></div>
+      </a>
+      <a href="#" class="research">
+        <div class="research__meta"><span>PAPER · 15 min</span><span>Apr 2026</span></div>
+        <h3 class="research__title">AI advisors, grounded in your own knowledge base</h3>
+        <p class="research__brief">A pragmatic architecture for domain LLMs that cite their sources — and know when to say "I don't know".</p>
+        <div class="research__tags"><span class="tag">AI</span><span class="tag">Architecture</span></div>
+      </a>
+      <a href="#" class="research">
+        <div class="research__meta"><span>NOTE · 5 min</span><span>Mar 2026</span></div>
+        <h3 class="research__title">Why "risk appetite" statements almost always lie</h3>
+        <p class="research__brief">And the two-column exercise that forces the truth into the open. Short. Uncomfortable. Useful.</p>
+        <div class="research__tags"><span class="tag">Risk</span><span class="tag">Governance</span></div>
+      </a>
+      <a href="#" class="research">
+        <div class="research__meta"><span>PAPER · 20 min</span><span>Mar 2026</span></div>
+        <h3 class="research__title">Bilingual product design · Arabic as first-class</h3>
+        <p class="research__brief">Type, RTL, numerals and cultural framing — designing platforms that don't feel like translated afterthoughts.</p>
+        <div class="research__tags"><span class="tag">Design</span><span class="tag">Arabic</span></div>
+      </a>
+    </div>
+  </div>
+</section>
 
-/* ---------- Section number & label helpers ---------- */
-.section-num {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--text-3);
-  letter-spacing: 0.14em;
-}
+<!-- ================= RESOURCES ================= -->
+<section class="section" id="resources" style="background: linear-gradient(180deg, transparent 0%, var(--bg-elev) 30%, var(--bg-elev) 70%, transparent 100%);">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div class="section-head__row">
+        <div>
+          <span class="eyebrow">Resources</span>
+          <h2 class="h2" style="margin-top: 18px;">Templates,<br><span class="serif" style="color: var(--gold-light);">toolkits, downloads.</span></h2>
+        </div>
+        <p class="lead" style="max-width: 42ch;">
+          Working files you can lift and adapt. Spreadsheets, matrices, checklists — the
+          same instruments we use in engagements, minus the client watermark.
+        </p>
+      </div>
+      <hr class="hairline">
+    </div>
 
-/* Utility scroll-anchor offset */
-[id] { scroll-margin-top: 100px; }
+    <div class="resources-grid" data-reveal>
+      <a href="#" class="resource">
+        <div class="resource__meta"><span class="mono">XLSX · 24 KB</span><span class="badge badge--live" style="padding:2px 8px;">Live</span></div>
+        <h4 class="h4" style="margin-top: 8px;">SoD conflict matrix · Finance &amp; Procurement</h4>
+        <p class="resource__desc">Twelve archetype conflicts, colour-coded severity, composite-role suggestions.</p>
+        <span class="resource__cta">Download <span>↓</span></span>
+      </a>
+      <a href="#" class="resource">
+        <div class="resource__meta"><span class="mono">PDF · 1.2 MB</span><span class="badge badge--live" style="padding:2px 8px;">Live</span></div>
+        <h4 class="h4" style="margin-top: 8px;">Delegation-of-Authority template</h4>
+        <p class="resource__desc">Thresholds, approval chains and escalation paths for a mid-sized enterprise.</p>
+        <span class="resource__cta">Download <span>↓</span></span>
+      </a>
+      <a href="#" class="resource">
+        <div class="resource__meta"><span class="mono">XLSX · 48 KB</span><span class="badge badge--beta" style="padding:2px 8px;">Beta</span></div>
+        <h4 class="h4" style="margin-top: 8px;">Gold allocation planner · offline</h4>
+        <p class="resource__desc">The Investment Planner as a working spreadsheet — same math, no browser.</p>
+        <span class="resource__cta">Download <span>↓</span></span>
+      </a>
+      <a href="#" class="resource">
+        <div class="resource__meta"><span class="mono">DOCX · 96 KB</span><span class="badge" style="padding:2px 8px;">Preview</span></div>
+        <h4 class="h4" style="margin-top: 8px;">Internal audit workpaper set</h4>
+        <p class="resource__desc">Planning memo, sampling worksheet, finding template, closing letter.</p>
+        <span class="resource__cta">Download <span>↓</span></span>
+      </a>
+      <a href="#" class="resource">
+        <div class="resource__meta"><span class="mono">XLSX · 32 KB</span><span class="badge" style="padding:2px 8px;">Preview</span></div>
+        <h4 class="h4" style="margin-top: 8px;">Enterprise risk register</h4>
+        <p class="resource__desc">Likelihood × impact grid with control mapping and residual-risk deltas.</p>
+        <span class="resource__cta">Download <span>↓</span></span>
+      </a>
+      <a href="#" class="resource">
+        <div class="resource__meta"><span class="mono">PDF · 640 KB</span><span class="badge" style="padding:2px 8px;">Preview</span></div>
+        <h4 class="h4" style="margin-top: 8px;">Founder funding readiness checklist</h4>
+        <p class="resource__desc">24 points across product, market, team, capital table and metrics.</p>
+        <span class="resource__cta">Download <span>↓</span></span>
+      </a>
+    </div>
+  </div>
+</section>
 
-/* ---------- Live ticker ---------- */
-.ticker {
-  border-top: 1px solid var(--hairline-soft);
-  border-bottom: 1px solid var(--hairline-soft);
-  padding: 14px 0;
-  overflow: hidden;
-  position: relative;
-  margin-top: 24px;
-}
-.ticker__track {
-  display: flex;
-  gap: 60px;
-  animation: ticker 40s linear infinite;
-  width: max-content;
-}
-[dir="rtl"] .ticker__track { animation-direction: reverse; }
-.ticker__item {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--text-2);
-  letter-spacing: 0.08em;
-  white-space: nowrap;
-}
-.ticker__item strong {
-  color: var(--text);
-  font-weight: 500;
-}
-.ticker__item .up { color: var(--success); }
-.ticker__item .down { color: var(--danger); }
-.ticker__dot {
-  width: 4px;
-  height: 4px;
-  border-radius: 999px;
-  background: var(--gold);
-}
-@keyframes ticker {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
+<!-- ================= ABOUT / WHY GRC FORGE ================= -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div class="section-head__row">
+        <div>
+          <span class="eyebrow">About</span>
+          <h2 class="h2" style="margin-top: 18px;">Why <span class="serif" style="color: var(--gold-light);">GRC Forge</span> exists.</h2>
+        </div>
+      </div>
+      <hr class="hairline">
+    </div>
 
+    <div class="why-grid">
+      <div class="why" data-reveal>
+        <div class="why__num">→ 01</div>
+        <h3 class="why__title">Knowledge, not content</h3>
+        <p class="why__desc">Everything here comes from doing the work. No filler articles, no SEO padding. If it's not useful on Monday morning, we don't publish it.</p>
+      </div>
+      <div class="why" data-reveal>
+        <div class="why__num">→ 02</div>
+        <h3 class="why__title">Instruments, not decks</h3>
+        <p class="why__desc">A calculator you can use beats a chart you can look at. Every module ships as an interactive tool with real inputs and honest outputs.</p>
+      </div>
+      <div class="why" data-reveal>
+        <div class="why__num">→ 03</div>
+        <h3 class="why__title">Research-first</h3>
+        <p class="why__desc">Frameworks are versioned. Numbers are cited. When we're guessing, we say so — clearly, in the same font as everything else.</p>
+      </div>
+      <div class="why" data-reveal>
+        <div class="why__num">→ 04</div>
+        <h3 class="why__title">Bilingual, natively</h3>
+        <p class="why__desc">Arabic isn't a translation layer. Cairo type, RTL flow and cultural framing are designed in from the first draft — same for every language we add.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-/* ========================================================================
- * GRC Forge — v2 additions: submodule lists, resources grid, wide footer
- * ======================================================================== */
+<!-- ================= UPDATES ================= -->
+<section class="section section--tight">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div class="section-head__row">
+        <div>
+          <span class="eyebrow">Latest updates</span>
+          <h2 class="h2" style="margin-top: 18px;">What we shipped.</h2>
+        </div>
+        <a href="#" class="pillar__cta">Full changelog <span>→</span></a>
+      </div>
+      <hr class="hairline">
+    </div>
 
-/* Pillar submodules list (replaces the tags row for category cards) */
-.pillar__submodules {
-  list-style: none;
-  padding: 0;
-  margin: 18px 0 20px;
-  display: grid;
-  gap: 6px;
-  position: relative;
-}
-.pillar__submodules li {
-  display: grid;
-  grid-template-columns: 38px 1fr auto;
-  align-items: center;
-  gap: 10px;
-  padding: 9px 12px;
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  font-size: 13px;
-  color: var(--text);
-  transition: border-color .2s var(--ease-out), background .2s var(--ease-out);
-}
-.pillar__submodules li:hover {
-  border-color: var(--border-strong);
-  background: var(--surface);
-}
-.pillar__sub-num {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  color: var(--text-3);
-}
-.pillar__sub-name {
-  color: var(--text);
-  font-weight: 400;
-}
-.pillar__sub-link {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--gold);
-}
-[data-mode="light"] .pillar__sub-link { color: var(--gold-deep); }
-.pillar__sub-link:hover { color: var(--text); }
+    <div class="updates">
+      <div class="update" data-reveal>
+        <div class="update__date">18 · JUL · 2026</div>
+        <div class="update__body">
+          <h4>Investment Planner v1.0 — MVP live</h4>
+          <p>Three-slider allocation model with break-even math, scenario chart and full RTL support. Educational reference release.</p>
+        </div>
+        <span class="badge badge--live"><span class="badge__dot"></span>Live</span>
+      </div>
+      <div class="update" data-reveal>
+        <div class="update__date">02 · JUL · 2026</div>
+        <div class="update__body">
+          <h4>Design system v1 — light + dark tokens</h4>
+          <p>Complete token set for both modes, four accent palettes and Cairo typography wired into the Arabic layer.</p>
+        </div>
+        <span class="badge badge--live"><span class="badge__dot"></span>Live</span>
+      </div>
+      <div class="update" data-reveal>
+        <div class="update__date">14 · JUN · 2026</div>
+        <div class="update__body">
+          <h4>GRC Professional teaser page</h4>
+          <p>Control-plane dashboard preview and three future-tool cards (SoD Analyzer, DoA Builder, Risk Matrix) shipped as static teasers.</p>
+        </div>
+        <span class="badge badge--soon"><span class="badge__dot"></span>Preview</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-/* Flat pillar variant — no preview mock, list-only */
-.pillar--flat .pillar__preview { display: none; }
-.pillar--flat .pillar__submodules { margin-bottom: 8px; }
+<!-- ================= CTA PANEL ================= -->
+<section class="section">
+  <div class="container">
+    <div class="cta-panel" data-reveal>
+      <span class="eyebrow" style="justify-content: center; display: inline-flex;">Ready when you are</span>
+      <h2 class="h2" style="margin-top: 20px; max-width: 24ch; margin-inline: auto;">
+        Build <span class="serif" style="color: var(--gold-light);">smarter</span> decisions —
+        one instrument at a time.
+      </h2>
+      <p class="lead" style="margin-inline: auto; margin-top: 16px;">
+        Start with the live tool. Come back when the next one ships.
+      </p>
+      <div class="cta-panel__actions">
+        <a href="#intelligence" class="btn">Open Investment Planner <span class="btn__arrow">→</span></a>
+        <a href="#platforms" class="btn btn--ghost">See all pillars</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-/* Resources grid — templates and downloads */
-.resources-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin-top: 40px;
-}
-@media (max-width: 900px) { .resources-grid { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 620px) { .resources-grid { grid-template-columns: 1fr; } }
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid footer__grid--wide">
+      <div>
+        <div class="footer__brand">
+          <svg class="footer__brand-mark" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+            <path d="M32 4 L54 11 V31 C54 47 44 55 32 60 C20 55 10 47 10 31 V11 Z" fill="var(--navy-shield)" stroke="var(--gold)" stroke-width="3" stroke-linejoin="round"/>
+            <line x1="32" y1="16" x2="22" y2="26" stroke="var(--gold)" stroke-width="2"/>
+            <line x1="32" y1="16" x2="42" y2="26" stroke="var(--gold)" stroke-width="2"/>
+            <line x1="22" y1="26" x2="32" y2="36" stroke="var(--gold)" stroke-width="2"/>
+            <line x1="42" y1="26" x2="32" y2="36" stroke="var(--gold)" stroke-width="2"/>
+            <line x1="32" y1="36" x2="32" y2="42" stroke="var(--gold)" stroke-width="2"/>
+            <circle cx="32" cy="16" r="3.2" fill="var(--gold)"/>
+            <circle cx="22" cy="26" r="3.2" fill="var(--gold)"/>
+            <circle cx="42" cy="26" r="3.2" fill="var(--gold)"/>
+            <circle cx="32" cy="36" r="3.2" fill="var(--gold)"/>
+            <path d="M17 42 H47 V46 H38 V49 H41 V52 H23 V49 H26 V46 H17 Z" fill="var(--gold)"/>
+          </svg>
+          <span>GRC · FORGE</span>
+        </div>
+        <div class="footer__tag">Governance, risk &amp; decisions — forged into instruments.</div>
+      </div>
+      <div class="footer__col">
+        <h5>Intelligence</h5>
+        <ul>
+          <li><a href="#intelligence">Gold Intelligence</a></li>
+          <li><a href="#">Market Intelligence</a></li>
+          <li><a href="#">AI Research</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h5>Governance</h5>
+        <ul>
+          <li><a href="#governance">GRC Professional</a></li>
+          <li><a href="#">Delegation of Authority</a></li>
+          <li><a href="#">Internal Audit</a></li>
+          <li><a href="#">Compliance</a></li>
+          <li><a href="#">Risk Management</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h5>Business</h5>
+        <ul>
+          <li><a href="#">Consulting</a></li>
+          <li><a href="#">Strategy</a></li>
+          <li><a href="#">Operating Model</a></li>
+          <li><a href="#">Digital Transformation</a></li>
+          <li><a href="#">Performance</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h5>Venture</h5>
+        <ul>
+          <li><a href="#">Entrepreneurship</a></li>
+          <li><a href="#">Startup Builder</a></li>
+          <li><a href="#">Funding</a></li>
+          <li><a href="#">Scaling</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h5>AI</h5>
+        <ul>
+          <li><a href="#">Gold AI</a></li>
+          <li><a href="#">GRC AI</a></li>
+          <li><a href="#">Business AI</a></li>
+          <li><a href="#">Venture AI</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h5>More</h5>
+        <ul>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#resources">Resources</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Privacy &amp; Disclaimer</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 GRC FORGE · All research is educational, not financial advice.</span>
+      <span>V1.0 · BUILT IN THE OPEN</span>
+    </div>
+  </div>
+</footer>
 
-.resource {
-  display: block;
-  padding: 22px 22px 20px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  transition: border-color .25s var(--ease-out), transform .25s var(--ease-out), background .25s;
-  position: relative;
-}
-.resource:hover {
-  border-color: var(--gold);
-  transform: translateY(-2px);
-  background: var(--surface-2);
-}
-[data-mode="light"] .resource:hover { border-color: var(--gold-deep); }
-.resource__meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 4px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  color: var(--text-3);
-  text-transform: uppercase;
-}
-.resource__desc {
-  color: var(--text-2);
-  font-size: 14px;
-  line-height: 1.55;
-  margin: 8px 0 16px;
-}
-.resource__cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--gold);
-  font-family: var(--font-mono);
-  font-size: 11.5px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-weight: 500;
-  transition: gap .2s var(--ease-out);
-}
-.resource:hover .resource__cta { gap: 12px; }
-[data-mode="light"] .resource__cta { color: var(--gold-deep); }
+<!-- ================= TWEAKS PANEL ================= -->
+<aside class="tweaks" id="tweaks-panel" aria-hidden="true">
+  <div class="tweaks__head">
+    <span class="tweaks__title">Tweaks</span>
+    <button class="tweaks__close" id="tweaks-close" aria-label="Close">✕</button>
+  </div>
 
-/* Wide 7-column footer for the full pillar taxonomy */
-.footer__grid--wide {
-  grid-template-columns: 1.8fr repeat(6, 1fr);
-  gap: 32px;
-}
-@media (max-width: 1200px) {
-  .footer__grid--wide { grid-template-columns: 1.6fr repeat(3, 1fr); }
-}
-@media (max-width: 780px) {
-  .footer__grid--wide { grid-template-columns: 1fr 1fr; }
-}
+  <div class="tweaks__group">
+    <label class="tweaks__label">Theme</label>
+    <div class="tweak-seg" data-tweak="mode">
+      <button data-val="dark" aria-pressed="true">Dark</button>
+      <button data-val="light">Light</button>
+    </div>
+  </div>
 
-/* Nav — more items = tighter gap + horizontal scroll fallback on small screens */
-.nav__links { gap: 22px; }
-@media (max-width: 1100px) {
-  .nav__links { gap: 16px; font-size: 13px; }
-}
-@media (max-width: 960px) {
-  .nav__links {
-    overflow-x: auto;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-    max-width: 60vw;
-    white-space: nowrap;
-    mask-image: linear-gradient(to right, black 85%, transparent 100%);
-  }
-  .nav__links::-webkit-scrollbar { display: none; }
-}
+  <div class="tweaks__group">
+    <label class="tweaks__label">Direction</label>
+    <div class="tweak-seg" data-tweak="dir">
+      <button data-val="ltr" aria-pressed="true">LTR · EN</button>
+      <button data-val="rtl">RTL · AR</button>
+    </div>
+  </div>
+
+  <div class="tweaks__group">
+    <label class="tweaks__label">Density</label>
+    <div class="tweak-seg" data-tweak="density">
+      <button data-val="airy">Airy</button>
+      <button data-val="balanced" aria-pressed="true">Balanced</button>
+      <button data-val="dense">Dense</button>
+    </div>
+  </div>
+
+  <div class="tweaks__group">
+    <label class="tweaks__label">Accent palette</label>
+    <div class="tweak-swatches" data-tweak="accent">
+      <button class="tweak-swatch" data-val="gold" aria-pressed="true"
+              title="Gold" style="background: linear-gradient(135deg, #C9A34A, #8A6B24);"></button>
+      <button class="tweak-swatch" data-val="platinum"
+              title="Platinum" style="background: linear-gradient(135deg, #E0E5EE, #6E7684);"></button>
+      <button class="tweak-swatch" data-val="copper"
+              title="Copper" style="background: linear-gradient(135deg, #E8A375, #7A4321);"></button>
+    </div>
+  </div>
+</aside>
+
+<script src="/static/js/i18n.js"></script>
+<script src="/static/js/tweaks.js"></script>
+<script src="/static/js/planner.js"></script>
+<script src="/static/js/reveal.js"></script>
+<script src="/static/js/ticker.js"></script>
+
+</body>
+</html>`
+
+export default app
