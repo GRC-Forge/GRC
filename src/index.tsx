@@ -9,8 +9,6 @@ app.get('/', (c) => {
   return c.html(PAGE_HTML)
 })
 
-export default app
-
 const PAGE_HTML = `<!doctype html>
 <html lang="en" data-mode="dark" data-density="balanced" data-accent="gold" dir="ltr">
 <head>
@@ -272,7 +270,7 @@ const PAGE_HTML = `<!doctype html>
           <li><span class="pillar__sub-num">3.4</span><span class="pillar__sub-name">Digital Transformation</span><span class="badge" style="padding:2px 8px;">Roadmap</span></li>
           <li><span class="pillar__sub-num">3.5</span><span class="pillar__sub-name">Performance</span><span class="badge" style="padding:2px 8px;">Roadmap</span></li>
         </ul>
-        <a href="#business" class="pillar__cta">Explore Business Engine <span>→</span></a>
+        <a href="#business" class="pillar__cta">Preview Business <span>→</span></a>
       </article>
 
       <!-- 04 Venture -->
@@ -291,7 +289,7 @@ const PAGE_HTML = `<!doctype html>
           <li><span class="pillar__sub-num">4.3</span><span class="pillar__sub-name">Funding</span><span class="badge" style="padding:2px 8px;">Roadmap</span></li>
           <li><span class="pillar__sub-num">4.4</span><span class="pillar__sub-name">Scaling</span><span class="badge" style="padding:2px 8px;">Roadmap</span></li>
         </ul>
-        <a href="#venture" class="pillar__cta">Explore Venture Studio <span>→</span></a>
+        <a href="#venture" class="pillar__cta">Preview Venture <span>→</span></a>
       </article>
 
       <!-- 05 AI -->
@@ -310,7 +308,15 @@ const PAGE_HTML = `<!doctype html>
           <li><span class="pillar__sub-num">5.3</span><span class="pillar__sub-name">Business AI</span><span class="badge" style="padding:2px 8px;">Roadmap</span></li>
           <li><span class="pillar__sub-num">5.4</span><span class="pillar__sub-name">Venture AI</span><span class="badge" style="padding:2px 8px;">Roadmap</span></li>
         </ul>
-        <a href="#ai" class="pillar__cta">Explore AI Core <span>→</span></a>
+        <div class="pillar__preview" style="display: grid; gap: 8px; padding: 12px;">
+          <div class="console__list-item" style="background: var(--surface); font-size: 12px;">
+            <span style="color: var(--gold);">›</span> <span>What's the SoD conflict for FI-CO role bundle?</span> <strong style="color:var(--success)">▲</strong>
+          </div>
+          <div class="console__list-item" style="background: var(--surface-2); font-size: 11.5px; color: var(--text-3);">
+            <em>Analyzing · 2 conflicts detected in transaction group FB60 ↔ MIRO...</em>
+          </div>
+        </div>
+        <a href="#ai" class="pillar__cta">Preview AI <span>→</span></a>
       </article>
 
       <!-- 06 Research + Resources + About : flat pillars -->
@@ -581,299 +587,556 @@ const PAGE_HTML = `<!doctype html>
           <div class="grc-table__row"><span>User access request · IT-Admin bundle</span><span class="mono">Rev 2/3</span><span class="badge badge--soon" style="padding: 2px 8px;">In review</span></div>
           <div class="grc-table__row"><span>Policy exception · vendor-master</span><span class="mono">SLA 4d</span><span class="badge" style="padding: 2px 8px;">Pending</span></div>
           <div class="grc-table__row"><span>Role change · FI Controller</span><span class="mono">v3.1</span><span class="badge badge--live" style="padding: 2px 8px;">Approved</span></div>
+          <div class="grc-table__row"><span>Control test · SoD payables↔procurement</span><span class="mono">Auto</span><span class="badge badge--live" style="padding: 2px 8px;">Active</span></div>
         </div>
+        <div class="grc-table">
+          <h4 class="h4" style="margin-bottom: 14px;">Risk heat</h4>
+          <div class="grc-table__row"><span>Segregation of duties</span><span class="mono">high</span><span style="color: var(--danger); font-family: var(--font-mono); font-size: 12px;">■■■■</span></div>
+          <div class="grc-table__row"><span>Vendor master data</span><span class="mono">med</span><span style="color: var(--warning); font-family: var(--font-mono); font-size: 12px;">■■■</span></div>
+          <div class="grc-table__row"><span>Delegation of authority</span><span class="mono">med</span><span style="color: var(--warning); font-family: var(--font-mono); font-size: 12px;">■■</span></div>
+          <div class="grc-table__row"><span>Access recertification</span><span class="mono">low</span><span style="color: var(--success); font-family: var(--font-mono); font-size: 12px;">■</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grc-tools" data-reveal>
+      <div class="grc-tool">
+        <div class="grc-tool__num">2.1 · Q3 2026</div>
+        <h4 class="h4">GRC Professional</h4>
+        <p>SoD Analyzer, DoA Builder, Risk Matrix — the three core instruments packaged for enterprise risk teams.</p>
+      </div>
+      <div class="grc-tool">
+        <div class="grc-tool__num">2.2 · Q3 2026</div>
+        <h4 class="h4">Delegation of Authority</h4>
+        <p>Thresholds, approval chains and escalation paths — mapped to real spend and sign-off authority across the org.</p>
+      </div>
+      <div class="grc-tool">
+        <div class="grc-tool__num">2.3 · Q4 2026</div>
+        <h4 class="h4">Internal Audit</h4>
+        <p>Audit universe, sampling plans and workpaper templates — with a live status board for open findings.</p>
+      </div>
+      <div class="grc-tool">
+        <div class="grc-tool__num">2.4 · Q1 2027</div>
+        <h4 class="h4">Compliance</h4>
+        <p>Regulation-to-control mapping with obligation registers and evidence trails — exportable to the auditor's inbox.</p>
+      </div>
+      <div class="grc-tool">
+        <div class="grc-tool__num">2.5 · Q1 2027</div>
+        <h4 class="h4">Risk Management</h4>
+        <p>Enterprise risk register, likelihood × impact matrices and residual-risk deltas after control uplift.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= BUSINESS SECTION ================= -->
-<section class="section" id="business">
+<!-- ================= BUSINESS TEASER ================= -->
+<section class="section" id="business" style="--gold: var(--pillar-business); --gold-light: var(--pillar-business-light); --gold-deep: var(--pillar-business-deep);">
   <div class="container">
     <div class="section-head" data-reveal>
       <div class="section-head__row">
         <div>
-          <span class="eyebrow" style="color: var(--business, #10b981); border-color: var(--business, #10b981);">Pillar 03 · Business</span>
-          <h2 class="h2" style="margin-top: 18px;">Business Engine,<br><span class="serif" style="color: var(--business, #10b981);">structured for performance.</span></h2>
+          <span class="eyebrow" data-i18n="biz.eyebrow">Business · Decision Engines</span>
+          <h2 class="h2" style="margin-top: 18px;" data-i18n-html="biz.title">Strategy,<br><span class="serif" style="color: var(--gold-light);">without the slideware.</span></h2>
         </div>
-        <p class="lead" style="max-width: 44ch;">
-          Executive consulting, operating model design, and digital transformation playbooks to convert strategic intent into measurable execution.
+        <p class="lead" style="max-width: 44ch;" data-i18n="biz.sub">
+          Executive dashboards, KPI trackers and strategic decision engines — for leaders who
+          need to convert uncertainty into direction, fast.
         </p>
       </div>
-      <hr class="hairline">
     </div>
-
-    <div class="pillars" data-reveal>
-      <article class="pillar">
-        <h3 class="pillar__title">Consulting &amp; Strategy</h3>
-        <p class="pillar__desc">High-impact advisory frameworks for corporate strategy, market positioning, and executive decision intelligence under regulatory constraint.</p>
-      </article>
-
-      <article class="pillar">
-        <h3 class="pillar__title">Operating Model</h3>
-        <p class="pillar__desc">Designing modern, agile organizational structures that align governance with operational speed and clear accountability.</p>
-      </article>
-
-      <article class="pillar">
-        <h3 class="pillar__title">Digital Transformation</h3>
-        <p class="pillar__desc">Modernizing legacy enterprise processes through cloud-edge infrastructure, automated compliance, and real-time integrations.</p>
-      </article>
-
-      <article class="pillar">
-        <h3 class="pillar__title">Performance &amp; Scale</h3>
-        <p class="pillar__desc">Data-driven KPI frameworks, resource allocation models, and continuous improvement metrics tailored for high-growth firms.</p>
-      </article>
+    <div class="grc-tools" data-reveal>
+      <div class="grc-tool">
+        <div class="grc-tool__num">3.1 · Roadmap</div>
+        <h4 class="h4" data-i18n="biz1.t">Consulting</h4>
+        <p data-i18n="biz1.d">Engagement frameworks, diagnostic toolkits and deliverable templates drawn from real advisory work.</p>
+      </div>
+      <div class="grc-tool">
+        <div class="grc-tool__num">3.2 · Roadmap</div>
+        <h4 class="h4" data-i18n="biz2.t">Strategy</h4>
+        <p data-i18n="biz2.d">Scenario builders and strategic option matrices that turn ambiguity into ranked, defensible choices.</p>
+      </div>
+      <div class="grc-tool">
+        <div class="grc-tool__num">3.3 · Roadmap</div>
+        <h4 class="h4" data-i18n="biz3.t">Operating Model</h4>
+        <p data-i18n="biz3.d">Org design canvases, RACI generators and capability heatmaps for transformation programs.</p>
+      </div>
+      <div class="grc-tool">
+        <div class="grc-tool__num">3.4 · Roadmap</div>
+        <h4 class="h4" data-i18n="biz4.t">Digital Transformation</h4>
+        <p data-i18n="biz4.d">Maturity assessments and roadmap sequencers grounded in what actually ships — not vendor decks.</p>
+      </div>
+      <div class="grc-tool">
+        <div class="grc-tool__num">3.5 · Roadmap</div>
+        <h4 class="h4" data-i18n="biz5.t">Performance</h4>
+        <p data-i18n="biz5.d">KPI trees, executive scorecards and variance narratives that survive the second Tuesday of the quarter.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ================= VENTURE SECTION ================= -->
-<section class="section" id="venture" style="background: linear-gradient(180deg, transparent 0%, var(--bg-elev) 30%, var(--bg-elev) 70%, transparent 100%);">
+<!-- ================= VENTURE TEASER ================= -->
+<section class="section" id="venture" style="--gold: var(--pillar-venture); --gold-light: var(--pillar-venture-light); --gold-deep: var(--pillar-venture-deep); background: linear-gradient(180deg, transparent 0%, var(--bg-elev) 30%, var(--bg-elev) 70%, transparent 100%);">
   <div class="container">
     <div class="section-head" data-reveal>
       <div class="section-head__row">
         <div>
-          <span class="eyebrow" style="color: var(--venture, #d97706); border-color: var(--venture, #d97706);">Pillar 04 · Venture</span>
-          <h2 class="h2" style="margin-top: 18px;">Venture Studio,<br><span class="serif" style="color: var(--venture, #d97706);">forging new systems.</span></h2>
+          <span class="eyebrow" data-i18n="ven.eyebrow">Venture · Founder Console</span>
+          <h2 class="h2" style="margin-top: 18px;" data-i18n-html="ven.title">Ventures,<br><span class="serif" style="color: var(--gold-light);">without the folklore.</span></h2>
         </div>
-        <p class="lead" style="max-width: 44ch;">
-          Building, funding, and scaling the next generation of risk, governance, and enterprise SaaS companies from ground zero.
+        <p class="lead" style="max-width: 44ch;" data-i18n="ven.sub">
+          A founder's operating console — from idea to scale, built by someone who has done
+          the work, not written about it.
         </p>
       </div>
-      <hr class="hairline">
     </div>
-
-    <div class="pillars" data-reveal>
-      <article class="pillar">
-        <h3 class="pillar__title">Entrepreneurship</h3>
-        <p class="pillar__desc">Incubating high-conviction ideas into market-ready SaaS instruments with compliance baked in from line one.</p>
-      </article>
-
-      <article class="pillar">
-        <h3 class="pillar__title">Startup Builder</h3>
-        <p class="pillar__desc">Practical execution frameworks, product architecture blueprints, and rapid prototyping workflows for technical founders.</p>
-      </article>
-
-      <article class="pillar">
-        <h3 class="pillar__title">Funding &amp; Capital</h3>
-        <p class="pillar__desc">Strategic seed investments, venture partnerships, and capital allocation models optimized for long-term equity growth.</p>
-      </article>
-
-      <article class="pillar">
-        <h3 class="pillar__title">Scaling Math</h3>
-        <p class="pillar__desc">Battle-tested playbooks for international market entry, customer acquisition mechanics, and enterprise sales readiness.</p>
-      </article>
+    <div class="grc-tools" data-reveal>
+      <div class="grc-tool">
+        <div class="grc-tool__num">4.1 · Roadmap</div>
+        <h4 class="h4" data-i18n="ven1.t">Entrepreneurship</h4>
+        <p data-i18n="ven1.d">Idea-to-thesis worksheets and validation loops built from real founder post-mortems.</p>
+      </div>
+      <div class="grc-tool">
+        <div class="grc-tool__num">4.2 · Roadmap</div>
+        <h4 class="h4" data-i18n="ven2.t">Startup Builder</h4>
+        <p data-i18n="ven2.d">MVP scoping, build-vs-buy calls and launch checklists — one console from first commit to first customer.</p>
+      </div>
+      <div class="grc-tool">
+        <div class="grc-tool__num">4.3 · Roadmap</div>
+        <h4 class="h4" data-i18n="ven3.t">Funding</h4>
+        <p data-i18n="ven3.d">Readiness scorecards, cap table math and investor-meeting prep grounded in fifteen years of teardowns.</p>
+      </div>
+      <div class="grc-tool">
+        <div class="grc-tool__num">4.4 · Roadmap</div>
+        <h4 class="h4" data-i18n="ven4.t">Scaling</h4>
+        <p data-i18n="ven4.d">Unit-economics models, hiring sequencers and the math of growing without breaking.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ================= AI SECTION ================= -->
-<section class="section" id="ai">
+<!-- ================= AI TEASER ================= -->
+<section class="section" id="ai" style="--gold: var(--pillar-ai); --gold-light: var(--pillar-ai-light); --gold-deep: var(--pillar-ai-deep);">
   <div class="container">
     <div class="section-head" data-reveal>
       <div class="section-head__row">
         <div>
-          <span class="eyebrow" style="color: var(--ai, #8b5cf6); border-color: var(--ai, #8b5cf6);">Pillar 05 · AI</span>
-          <h2 class="h2" style="margin-top: 18px;">AI Intelligence Core,<br><span class="serif" style="color: var(--ai, #8b5cf6);">reasoning on data.</span></h2>
+          <span class="eyebrow" data-i18n="ais.eyebrow">AI · Reasoning Surfaces</span>
+          <h2 class="h2" style="margin-top: 18px;" data-i18n-html="ais.title">AI,<br><span class="serif" style="color: var(--gold-light);">without the hype.</span></h2>
         </div>
-        <p class="lead" style="max-width: 44ch;">
-          Domain-specific artificial intelligence models powering decision intelligence across gold markets, enterprise risk, and venture scaling.
+        <p class="lead" style="max-width: 44ch;" data-i18n="ais.sub">
+          Domain advisors grounded in the same knowledge base that powers every pillar —
+          they cite their sources and know when to say "I don't know".
         </p>
       </div>
-      <hr class="hairline">
     </div>
-
-    <div class="pillars" data-reveal>
-      <article class="pillar">
-        <h3 class="pillar__title">Gold AI</h3>
-        <p class="pillar__desc">Predictive market intelligence and physical asset modeling tuned for precision asset allocation and macro risk hedging.</p>
-      </article>
-
-      <article class="pillar">
-        <h3 class="pillar__title">GRC AI</h3>
-        <p class="pillar__desc">Automated regulatory tracking, policy generator, and real-time gap analysis reasoning engines grounded in audit standards.</p>
-      </article>
-
-      <article class="pillar">
-        <h3 class="pillar__title">Business AI</h3>
-        <p class="pillar__desc">Executive copilot for operational workflow optimization, financial scenario simulation, and organizational bottleneck analysis.</p>
-      </article>
-
-      <article class="pillar">
-        <h3 class="pillar__title">Venture AI</h3>
-        <p class="pillar__desc">Market opportunity detection, valuation assistance, and growth traction analytics tailored for startup investment boards.</p>
-      </article>
+    <div class="grc-tools" data-reveal>
+      <div class="grc-tool">
+        <div class="grc-tool__num">5.1 · Roadmap</div>
+        <h4 class="h4" data-i18n="ai1.t">Gold AI</h4>
+        <p data-i18n="ai1.d">An advisor grounded in market context and your positions — break-even math on demand, sources attached.</p>
+      </div>
+      <div class="grc-tool">
+        <div class="grc-tool__num">5.2 · Roadmap</div>
+        <h4 class="h4" data-i18n="ai2.t">GRC AI</h4>
+        <p data-i18n="ai2.d">SoD conflict answers, control mapping and policy drafting on top of the governance knowledge base.</p>
+      </div>
+      <div class="grc-tool">
+        <div class="grc-tool__num">5.3 · Roadmap</div>
+        <h4 class="h4" data-i18n="ai3.t">Business AI</h4>
+        <p data-i18n="ai3.d">Scenario stress-tests and KPI diagnostics that reason over your operating data, not generic benchmarks.</p>
+      </div>
+      <div class="grc-tool">
+        <div class="grc-tool__num">5.4 · Roadmap</div>
+        <h4 class="h4" data-i18n="ai4.t">Venture AI</h4>
+        <p data-i18n="ai4.d">Funding-readiness reviews and pitch teardowns grounded in the venture playbooks.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ================= RESEARCH / RESOURCES / ABOUT ================= -->
-<section class="section" id="research" style="background: linear-gradient(180deg, transparent 0%, var(--bg-elev) 30%, var(--bg-elev) 70%, transparent 100%);">
+<!-- ================= RESEARCH HUB ================= -->
+<section class="section" id="research">
   <div class="container">
     <div class="section-head" data-reveal>
       <div class="section-head__row">
         <div>
-          <span class="eyebrow">Knowledge &amp; Foundation</span>
-          <h2 class="h2" style="margin-top: 18px;">Research, Resources &amp; About.</h2>
+          <span class="eyebrow">Research</span>
+          <h2 class="h2" style="margin-top: 18px;">Notes written<br><span class="serif" style="color: var(--gold-light);">to be used.</span></h2>
         </div>
-        <p class="lead" style="max-width: 44ch;">
-          Our open knowledge base, downloadable instruments, and the core philosophy driving GRC Forge.
+        <p class="lead" style="max-width: 42ch;">
+          Applied frameworks, working papers and short-form observations. All English/Arabic.
+          Free to read; expensive to ignore.
         </p>
       </div>
       <hr class="hairline">
     </div>
 
-    <div class="pillars" data-reveal id="resources">
-      <article class="pillar">
-        <h3 class="pillar__title">Research Hub</h3>
-        <p class="pillar__desc">Applied whitepapers on gold market liquidity, governance automation, and edge decision engines.</p>
-      </article>
-      <article class="pillar">
-        <h3 class="pillar__title">Resources &amp; Toolkits</h3>
-        <p class="pillar__desc">Downloadable risk matrices, delegation of authority templates, and policy frameworks.</p>
-      </article>
-      <article class="pillar" id="about">
-        <h3 class="pillar__title">About GRC Forge</h3>
-        <p class="pillar__desc">Built to replace bloated advisory slides with interactive, real-time software instruments.</p>
-      </article>
+    <div class="research-cats" data-reveal>
+      <button class="research-cat is-active">All · 24</button>
+      <button class="research-cat">Gold · 6</button>
+      <button class="research-cat">Governance · 8</button>
+      <button class="research-cat">Consulting · 5</button>
+      <button class="research-cat">AI · 3</button>
+      <button class="research-cat">Notes · 12</button>
+    </div>
+
+    <div class="research-grid" data-reveal>
+      <a href="#" class="research">
+        <div class="research__meta"><span>PAPER · 18 min</span><span>Jul 2026</span></div>
+        <h3 class="research__title">Gold cycles 2020–2026: what worked, what didn't</h3>
+        <p class="research__brief">Six years of allocation experiments through pandemic, inflation and rate shocks — with the entry rules that would have worked in each regime.</p>
+        <div class="research__tags"><span class="tag">Gold</span><span class="tag">Cycles</span></div>
+      </a>
+      <a href="#" class="research">
+        <div class="research__meta"><span>FRAMEWORK · 9 min</span><span>Jun 2026</span></div>
+        <h3 class="research__title">SoD design patterns for mid-sized ERP tenants</h3>
+        <p class="research__brief">Twelve archetype conflicts and the composite roles that consistently resolve them without paralyzing finance.</p>
+        <div class="research__tags"><span class="tag">GRC</span><span class="tag">ERP</span></div>
+      </a>
+      <a href="#" class="research">
+        <div class="research__meta"><span>NOTE · 4 min</span><span>Jun 2026</span></div>
+        <h3 class="research__title">Executive decision loops · a working diagram</h3>
+        <p class="research__brief">Why most exec dashboards fail on the second Tuesday of the quarter, and a two-layer alternative that survives.</p>
+        <div class="research__tags"><span class="tag">Consulting</span></div>
+      </a>
+      <a href="#" class="research">
+        <div class="research__meta"><span>PAPER · 22 min</span><span>May 2026</span></div>
+        <h3 class="research__title">Delegation-of-Authority as a product surface</h3>
+        <p class="research__brief">Treating DoA as a live app — not a PDF — with typed thresholds, escalation graphs and audit exports.</p>
+        <div class="research__tags"><span class="tag">Governance</span><span class="tag">DoA</span></div>
+      </a>
+      <a href="#" class="research">
+        <div class="research__meta"><span>NOTE · 3 min</span><span>May 2026</span></div>
+        <h3 class="research__title">The 24K premium math nobody teaches</h3>
+        <p class="research__brief">Dealer premium, VAT, spread and refining margin — combined into a single break-even you can carry to a shop.</p>
+        <div class="research__tags"><span class="tag">Gold</span><span class="tag">Retail</span></div>
+      </a>
+      <a href="#" class="research">
+        <div class="research__meta"><span>FRAMEWORK · 12 min</span><span>Apr 2026</span></div>
+        <h3 class="research__title">Founder funding readiness · a 24-point checklist</h3>
+        <p class="research__brief">What we look for before a founder meets money — grounded in fifteen years of teardowns and post-mortems.</p>
+        <div class="research__tags"><span class="tag">Startup</span><span class="tag">Funding</span></div>
+      </a>
+      <a href="#" class="research">
+        <div class="research__meta"><span>PAPER · 15 min</span><span>Apr 2026</span></div>
+        <h3 class="research__title">AI advisors, grounded in your own knowledge base</h3>
+        <p class="research__brief">A pragmatic architecture for domain LLMs that cite their sources — and know when to say "I don't know".</p>
+        <div class="research__tags"><span class="tag">AI</span><span class="tag">Architecture</span></div>
+      </a>
+      <a href="#" class="research">
+        <div class="research__meta"><span>NOTE · 5 min</span><span>Mar 2026</span></div>
+        <h3 class="research__title">Why "risk appetite" statements almost always lie</h3>
+        <p class="research__brief">And the two-column exercise that forces the truth into the open. Short. Uncomfortable. Useful.</p>
+        <div class="research__tags"><span class="tag">Risk</span><span class="tag">Governance</span></div>
+      </a>
+      <a href="#" class="research">
+        <div class="research__meta"><span>PAPER · 20 min</span><span>Mar 2026</span></div>
+        <h3 class="research__title">Bilingual product design · Arabic as first-class</h3>
+        <p class="research__brief">Type, RTL, numerals and cultural framing — designing platforms that don't feel like translated afterthoughts.</p>
+        <div class="research__tags"><span class="tag">Design</span><span class="tag">Arabic</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RESOURCES ================= -->
+<section class="section" id="resources" style="background: linear-gradient(180deg, transparent 0%, var(--bg-elev) 30%, var(--bg-elev) 70%, transparent 100%);">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div class="section-head__row">
+        <div>
+          <span class="eyebrow">Resources</span>
+          <h2 class="h2" style="margin-top: 18px;">Templates,<br><span class="serif" style="color: var(--gold-light);">toolkits, downloads.</span></h2>
+        </div>
+        <p class="lead" style="max-width: 42ch;">
+          Working files you can lift and adapt. Spreadsheets, matrices, checklists — the
+          same instruments we use in engagements, minus the client watermark.
+        </p>
+      </div>
+      <hr class="hairline">
+    </div>
+
+    <div class="resources-grid" data-reveal>
+      <a href="#" class="resource">
+        <div class="resource__meta"><span class="mono">XLSX · 24 KB</span><span class="badge badge--live" style="padding:2px 8px;">Live</span></div>
+        <h4 class="h4" style="margin-top: 8px;">SoD conflict matrix · Finance &amp; Procurement</h4>
+        <p class="resource__desc">Twelve archetype conflicts, colour-coded severity, composite-role suggestions.</p>
+        <span class="resource__cta">Download <span>↓</span></span>
+      </a>
+      <a href="#" class="resource">
+        <div class="resource__meta"><span class="mono">PDF · 1.2 MB</span><span class="badge badge--live" style="padding:2px 8px;">Live</span></div>
+        <h4 class="h4" style="margin-top: 8px;">Delegation-of-Authority template</h4>
+        <p class="resource__desc">Thresholds, approval chains and escalation paths for a mid-sized enterprise.</p>
+        <span class="resource__cta">Download <span>↓</span></span>
+      </a>
+      <a href="#" class="resource">
+        <div class="resource__meta"><span class="mono">XLSX · 48 KB</span><span class="badge badge--beta" style="padding:2px 8px;">Beta</span></div>
+        <h4 class="h4" style="margin-top: 8px;">Gold allocation planner · offline</h4>
+        <p class="resource__desc">The Investment Planner as a working spreadsheet — same math, no browser.</p>
+        <span class="resource__cta">Download <span>↓</span></span>
+      </a>
+      <a href="#" class="resource">
+        <div class="resource__meta"><span class="mono">DOCX · 96 KB</span><span class="badge" style="padding:2px 8px;">Preview</span></div>
+        <h4 class="h4" style="margin-top: 8px;">Internal audit workpaper set</h4>
+        <p class="resource__desc">Planning memo, sampling worksheet, finding template, closing letter.</p>
+        <span class="resource__cta">Download <span>↓</span></span>
+      </a>
+      <a href="#" class="resource">
+        <div class="resource__meta"><span class="mono">XLSX · 32 KB</span><span class="badge" style="padding:2px 8px;">Preview</span></div>
+        <h4 class="h4" style="margin-top: 8px;">Enterprise risk register</h4>
+        <p class="resource__desc">Likelihood × impact grid with control mapping and residual-risk deltas.</p>
+        <span class="resource__cta">Download <span>↓</span></span>
+      </a>
+      <a href="#" class="resource">
+        <div class="resource__meta"><span class="mono">PDF · 640 KB</span><span class="badge" style="padding:2px 8px;">Preview</span></div>
+        <h4 class="h4" style="margin-top: 8px;">Founder funding readiness checklist</h4>
+        <p class="resource__desc">24 points across product, market, team, capital table and metrics.</p>
+        <span class="resource__cta">Download <span>↓</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT / WHY GRC FORGE ================= -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div class="section-head__row">
+        <div>
+          <span class="eyebrow">About</span>
+          <h2 class="h2" style="margin-top: 18px;">Why <span class="serif" style="color: var(--gold-light);">GRC Forge</span> exists.</h2>
+        </div>
+      </div>
+      <hr class="hairline">
+    </div>
+
+    <div class="why-grid">
+      <div class="why" data-reveal>
+        <div class="why__num">→ 01</div>
+        <h3 class="why__title">Knowledge, not content</h3>
+        <p class="why__desc">Everything here comes from doing the work. No filler articles, no SEO padding. If it's not useful on Monday morning, we don't publish it.</p>
+      </div>
+      <div class="why" data-reveal>
+        <div class="why__num">→ 02</div>
+        <h3 class="why__title">Instruments, not decks</h3>
+        <p class="why__desc">A calculator you can use beats a chart you can look at. Every module ships as an interactive tool with real inputs and honest outputs.</p>
+      </div>
+      <div class="why" data-reveal>
+        <div class="why__num">→ 03</div>
+        <h3 class="why__title">Research-first</h3>
+        <p class="why__desc">Frameworks are versioned. Numbers are cited. When we're guessing, we say so — clearly, in the same font as everything else.</p>
+      </div>
+      <div class="why" data-reveal>
+        <div class="why__num">→ 04</div>
+        <h3 class="why__title">Bilingual, natively</h3>
+        <p class="why__desc">Arabic isn't a translation layer. Cairo type, RTL flow and cultural framing are designed in from the first draft — same for every language we add.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= UPDATES ================= -->
+<section class="section section--tight">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div class="section-head__row">
+        <div>
+          <span class="eyebrow">Latest updates</span>
+          <h2 class="h2" style="margin-top: 18px;">What we shipped.</h2>
+        </div>
+        <a href="#" class="pillar__cta">Full changelog <span>→</span></a>
+      </div>
+      <hr class="hairline">
+    </div>
+
+    <div class="updates">
+      <div class="update" data-reveal>
+        <div class="update__date">18 · JUL · 2026</div>
+        <div class="update__body">
+          <h4>Investment Planner v1.0 — MVP live</h4>
+          <p>Three-slider allocation model with break-even math, scenario chart and full RTL support. Educational reference release.</p>
+        </div>
+        <span class="badge badge--live"><span class="badge__dot"></span>Live</span>
+      </div>
+      <div class="update" data-reveal>
+        <div class="update__date">02 · JUL · 2026</div>
+        <div class="update__body">
+          <h4>Design system v1 — light + dark tokens</h4>
+          <p>Complete token set for both modes, four accent palettes and Cairo typography wired into the Arabic layer.</p>
+        </div>
+        <span class="badge badge--live"><span class="badge__dot"></span>Live</span>
+      </div>
+      <div class="update" data-reveal>
+        <div class="update__date">14 · JUN · 2026</div>
+        <div class="update__body">
+          <h4>GRC Professional teaser page</h4>
+          <p>Control-plane dashboard preview and three future-tool cards (SoD Analyzer, DoA Builder, Risk Matrix) shipped as static teasers.</p>
+        </div>
+        <span class="badge badge--soon"><span class="badge__dot"></span>Preview</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA PANEL ================= -->
+<section class="section">
+  <div class="container">
+    <div class="cta-panel" data-reveal>
+      <span class="eyebrow" style="justify-content: center; display: inline-flex;">Ready when you are</span>
+      <h2 class="h2" style="margin-top: 20px; max-width: 24ch; margin-inline: auto;">
+        Build <span class="serif" style="color: var(--gold-light);">smarter</span> decisions —
+        one instrument at a time.
+      </h2>
+      <p class="lead" style="margin-inline: auto; margin-top: 16px;">
+        Start with the live tool. Come back when the next one ships.
+      </p>
+      <div class="cta-panel__actions">
+        <a href="#intelligence" class="btn">Open Investment Planner <span class="btn__arrow">→</span></a>
+        <a href="#platforms" class="btn btn--ghost">See all pillars</a>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ================= FOOTER ================= -->
-<footer class="footer" role="contentinfo" style="padding: 4rem 0 2rem; border-top: 1px solid var(--border); background: var(--bg-elev);">
+<footer class="footer">
   <div class="container">
-    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem; margin-bottom: 2rem;">
-      <div style="display: flex; align-items: center; gap: 12px;">
-        <svg viewBox="0 0 64 64" fill="none" style="width: 28px; height: 28px;">
-          <path d="M32 4 L54 11 V31 C54 47 44 55 32 60 C20 55 10 47 10 31 V11 Z" fill="var(--navy-shield)" stroke="var(--gold)" stroke-width="3" stroke-linejoin="round"/>
-          <circle cx="32" cy="16" r="3.2" fill="var(--gold)"/>
-          <circle cx="22" cy="26" r="3.2" fill="var(--gold)"/>
-          <circle cx="42" cy="26" r="3.2" fill="var(--gold)"/>
-          <circle cx="32" cy="36" r="3.2" fill="var(--gold)"/>
-        </svg>
-        <span style="font-weight: 700; letter-spacing: 1px; color: var(--text);">GRC · FORGE</span>
+    <div class="footer__grid footer__grid--wide">
+      <div>
+        <div class="footer__brand">
+          <svg class="footer__brand-mark" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+            <path d="M32 4 L54 11 V31 C54 47 44 55 32 60 C20 55 10 47 10 31 V11 Z" fill="var(--navy-shield)" stroke="var(--gold)" stroke-width="3" stroke-linejoin="round"/>
+            <line x1="32" y1="16" x2="22" y2="26" stroke="var(--gold)" stroke-width="2"/>
+            <line x1="32" y1="16" x2="42" y2="26" stroke="var(--gold)" stroke-width="2"/>
+            <line x1="22" y1="26" x2="32" y2="36" stroke="var(--gold)" stroke-width="2"/>
+            <line x1="42" y1="26" x2="32" y2="36" stroke="var(--gold)" stroke-width="2"/>
+            <line x1="32" y1="36" x2="32" y2="42" stroke="var(--gold)" stroke-width="2"/>
+            <circle cx="32" cy="16" r="3.2" fill="var(--gold)"/>
+            <circle cx="22" cy="26" r="3.2" fill="var(--gold)"/>
+            <circle cx="42" cy="26" r="3.2" fill="var(--gold)"/>
+            <circle cx="32" cy="36" r="3.2" fill="var(--gold)"/>
+            <path d="M17 42 H47 V46 H38 V49 H41 V52 H23 V49 H26 V46 H17 Z" fill="var(--gold)"/>
+          </svg>
+          <span>GRC · FORGE</span>
+        </div>
+        <div class="footer__tag">Governance, risk &amp; decisions — forged into instruments.</div>
       </div>
-      <p class="mono" style="font-size: 13px; color: var(--text-3);">
-        © 2026 GRC Forge. Governance, Risk &amp; Decisions, forged into instruments.
-      </p>
+      <div class="footer__col">
+        <h5>Intelligence</h5>
+        <ul>
+          <li><a href="#intelligence">Gold Intelligence</a></li>
+          <li><a href="#">Market Intelligence</a></li>
+          <li><a href="#">AI Research</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h5>Governance</h5>
+        <ul>
+          <li><a href="#governance">GRC Professional</a></li>
+          <li><a href="#">Delegation of Authority</a></li>
+          <li><a href="#">Internal Audit</a></li>
+          <li><a href="#">Compliance</a></li>
+          <li><a href="#">Risk Management</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h5>Business</h5>
+        <ul>
+          <li><a href="#">Consulting</a></li>
+          <li><a href="#">Strategy</a></li>
+          <li><a href="#">Operating Model</a></li>
+          <li><a href="#">Digital Transformation</a></li>
+          <li><a href="#">Performance</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h5>Venture</h5>
+        <ul>
+          <li><a href="#">Entrepreneurship</a></li>
+          <li><a href="#">Startup Builder</a></li>
+          <li><a href="#">Funding</a></li>
+          <li><a href="#">Scaling</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h5>AI</h5>
+        <ul>
+          <li><a href="#">Gold AI</a></li>
+          <li><a href="#">GRC AI</a></li>
+          <li><a href="#">Business AI</a></li>
+          <li><a href="#">Venture AI</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h5>More</h5>
+        <ul>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#resources">Resources</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Privacy &amp; Disclaimer</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 GRC FORGE · All research is educational, not financial advice.</span>
+      <span>V1.0 · BUILT IN THE OPEN</span>
     </div>
   </div>
 </footer>
 
-<!-- ================= CLIENT ENGINE JS ================= -->
-<script>
-(function() {
-  // Theme & Mode Toggle
-  const modeBtn = document.getElementById('mode-toggle');
-  const rtlBtn = document.getElementById('rtl-toggle');
-  const html = document.documentElement;
+<!-- ================= TWEAKS PANEL ================= -->
+<aside class="tweaks" id="tweaks-panel" aria-hidden="true">
+  <div class="tweaks__head">
+    <span class="tweaks__title">Tweaks</span>
+    <button class="tweaks__close" id="tweaks-close" aria-label="Close">✕</button>
+  </div>
 
-  if (modeBtn) {
-    modeBtn.addEventListener('click', () => {
-      const current = html.getAttribute('data-mode') || 'dark';
-      const next = current === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-mode', next);
-    });
-  }
+  <div class="tweaks__group">
+    <label class="tweaks__label">Theme</label>
+    <div class="tweak-seg" data-tweak="mode">
+      <button data-val="dark" aria-pressed="true">Dark</button>
+      <button data-val="light">Light</button>
+    </div>
+  </div>
 
-  if (rtlBtn) {
-    rtlBtn.addEventListener('click', () => {
-      const dir = html.getAttribute('dir') === 'rtl' ? 'ltr' : 'rtl';
-      html.setAttribute('dir', dir);
-    });
-  }
+  <div class="tweaks__group">
+    <label class="tweaks__label">Direction</label>
+    <div class="tweak-seg" data-tweak="dir">
+      <button data-val="ltr" aria-pressed="true">LTR · EN</button>
+      <button data-val="rtl">RTL · AR</button>
+    </div>
+  </div>
 
-  // Ticker Data Generation
-  const tickerTrack = document.getElementById('ticker-track');
-  if (tickerTrack) {
-    const items = [
-      { label: 'XAU/USD', val: '$2,384.20', delta: '+1.84%' },
-      { label: '24K SAR/g', val: '287.60', delta: '+0.52%' },
-      { label: 'RISK INDEX', val: '18', delta: 'STABLE' },
-      { label: 'COMPLIANCE', val: '92%', delta: 'TARGET 95%' },
-      { label: 'GOLD SPREAD', val: '3.4%', delta: '-0.10%' }
-    ];
-    let htmlStr = '';
-    items.concat(items).forEach(item => {
-      htmlStr += \`<div class="ticker__item">
-        <span class="mono" style="color: var(--text-2);">\${item.label}</span>
-        <strong>\${item.val}</strong>
-        <span class="mono" style="color: var(--success);">\${item.delta}</span>
-      </div>\`;
-    });
-    tickerTrack.innerHTML = htmlStr;
-  }
+  <div class="tweaks__group">
+    <label class="tweaks__label">Density</label>
+    <div class="tweak-seg" data-tweak="density">
+      <button data-val="airy">Airy</button>
+      <button data-val="balanced" aria-pressed="true">Balanced</button>
+      <button data-val="dense">Dense</button>
+    </div>
+  </div>
 
-  // Gold Investment Planner Logic
-  const amountSlider = document.getElementById('amount');
-  const horizonSlider = document.getElementById('horizon');
-  const amountLabel = document.getElementById('amount-label');
-  const horizonLabel = document.getElementById('horizon-label');
-  const allocPctEl = document.getElementById('alloc-pct');
-  const allocGramsEl = document.getElementById('alloc-grams');
-  const legendGold = document.getElementById('legend-gold');
-  const legendOther = document.getElementById('legend-other');
-  const legendBreakeven = document.getElementById('legend-breakeven');
+  <div class="tweaks__group">
+    <label class="tweaks__label">Accent palette</label>
+    <div class="tweak-swatches" data-tweak="accent">
+      <button class="tweak-swatch" data-val="gold" aria-pressed="true"
+              title="Gold" style="background: linear-gradient(135deg, #C9A34A, #8A6B24);"></button>
+      <button class="tweak-swatch" data-val="platinum"
+              title="Platinum" style="background: linear-gradient(135deg, #E0E5EE, #6E7684);"></button>
+      <button class="tweak-swatch" data-val="copper"
+              title="Copper" style="background: linear-gradient(135deg, #E8A375, #7A4321);"></button>
+    </div>
+  </div>
+</aside>
 
-  const refPrice = 287.60;
+<script src="/static/js/i18n.js"></script>
+<script src="/static/js/tweaks.js"></script>
+<script src="/static/js/planner.js"></script>
+<script src="/static/js/reveal.js"></script>
+<script src="/static/js/ticker.js"></script>
 
-  function updatePlanner() {
-    if (!amountSlider || !horizonSlider) return;
-    const amount = parseFloat(amountSlider.value);
-    const horizon = parseInt(horizonSlider.value);
-
-    if (amountLabel) amountLabel.textContent = amount.toLocaleString() + ' SAR';
-    if (horizonLabel) horizonLabel.textContent = horizon + ' years';
-
-    // Calculation formula
-    const allocPct = 25;
-    const goldSAR = amount * (allocPct / 100);
-    const otherSAR = amount - goldSAR;
-    const grams = Math.round(goldSAR / refPrice);
-    const breakeven = (refPrice * 1.035).toFixed(2);
-
-    if (allocPctEl) allocPctEl.textContent = allocPct;
-    if (allocGramsEl) allocGramsEl.textContent = grams;
-    if (legendGold) legendGold.textContent = goldSAR.toLocaleString() + ' SAR';
-    if (legendOther) legendOther.textContent = otherSAR.toLocaleString() + ' SAR';
-    if (legendBreakeven) legendBreakeven.textContent = breakeven + ' SAR/g';
-
-    updateChart(amount, horizon);
-  }
-
-  function updateChart(amount, years) {
-    const chartSvg = document.getElementById('scenario-chart');
-    const chartYears = document.getElementById('chart-years');
-    if (chartYears) chartYears.textContent = years;
-    if (!chartSvg) return;
-
-    const goldSAR = amount * 0.25;
-    const worstVal = Math.round(goldSAR * 0.88);
-    const baseVal = Math.round(goldSAR * 1.38);
-    const bestVal = Math.round(goldSAR * 1.82);
-
-    const worstEl = document.getElementById('scenario-worst');
-    const baseEl = document.getElementById('scenario-base');
-    const bestEl = document.getElementById('scenario-best');
-
-    if (worstEl) worstEl.textContent = worstVal.toLocaleString() + ' SAR';
-    if (baseEl) baseEl.textContent = baseVal.toLocaleString() + ' SAR';
-    if (bestEl) bestEl.textContent = bestVal.toLocaleString() + ' SAR';
-
-    // Draw SVG SVG curves
-    chartSvg.innerHTML = \`
-      <path d="M0,150 Q300,160 600,170" fill="none" stroke="var(--danger, #ef4444)" stroke-width="2"/>
-      <path d="M0,150 Q300,110 600,80" fill="none" stroke="var(--gold)" stroke-width="2.5"/>
-      <path d="M0,150 Q300,60 600,20" fill="none" stroke="var(--success, #10b981)" stroke-width="2"/>
-    \`;
-  }
-
-  if (amountSlider) amountSlider.addEventListener('input', updatePlanner);
-  if (horizonSlider) horizonSlider.addEventListener('input', updatePlanner);
-
-  updatePlanner();
-})();
-</script>
 </body>
 </html>`
+
+export default app
