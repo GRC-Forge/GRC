@@ -199,3 +199,39 @@
   --tracking-display: 0;
   --tracking-tight: 0;
 }
+
+
+/* =========================================================
+   Brand mark + pillar accent system (added with logo v2)
+   Gold remains the brand + Intelligence/Gold pillar accent.
+   ========================================================= */
+:root,
+[data-mode="dark"] {
+  --navy-shield: #0E1B33;
+
+  --pillar-gold:       #C9A34A;  /* Intelligence · Gold  */
+  --pillar-governance: #5B87B5;  /* Governance — steel   */
+  --pillar-business:   #34A47C;  /* Business — emerald   */
+  --pillar-venture:    #C97A4A;  /* Venture — copper     */
+  --pillar-ai:         #8F7ED6;  /* AI — violet          */
+
+  --pillar-governance-light: #8FB3D9;  --pillar-governance-deep: #3E6B9B;
+  --pillar-business-light:   #6FD3AC;  --pillar-business-deep:   #1F8A5B;
+  --pillar-venture-light:    #E8A375;  --pillar-venture-deep:    #7A4321;
+  --pillar-ai-light:         #B8ABEB;  --pillar-ai-deep:         #6C5BB8;
+}
+
+[data-mode="light"] {
+  --navy-shield: #14264A;
+
+  --pillar-gold:       #8A6B24;
+  --pillar-governance: #3E6B9B;
+  --pillar-business:   #1F8A5B;
+  --pillar-venture:    #A85A2E;
+  --pillar-ai:         #6C5BB8;
+
+  --pillar-governance-light: #3E6B9B;  --pillar-governance-deep: #2C4E73;
+  --pillar-business-light:   #1F8A5B;  --pillar-business-deep:   #146842;
+  --pillar-venture-light:    #A85A2E;  --pillar-venture-deep:    #7A4321;
+  --pillar-ai-light:         #6C5BB8;  --pillar-ai-deep:         #503F91;
+}
