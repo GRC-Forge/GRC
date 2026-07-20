@@ -15,7 +15,7 @@ const PAGE_HTML = `<!doctype html>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>GRC Forge — Governance, Risk &amp; Decisions, forged into instruments.</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23C9A34A'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cpath%20d='M32%204%20L54%2011%20V31%20C54%2047%2044%2055%2032%2060%20C20%2055%2010%2047%2010%2031%20V11%20Z'%20fill='%230E1B33'%20stroke='%23C9A34A'%20stroke-width='4'%20stroke-linejoin='round'/%3E%3Ccircle%20cx='32'%20cy='17'%20r='3.5'%20fill='%23C9A34A'/%3E%3Ccircle%20cx='23'%20cy='26'%20r='3.5'%20fill='%23C9A34A'/%3E%3Ccircle%20cx='41'%20cy='26'%20r='3.5'%20fill='%23C9A34A'/%3E%3Cpath%20d='M16%2034%20H48%20V40%20H38%20V45%20H42%20V50%20H22%20V45%20H26%20V40%20H16%20Z'%20fill='%23C9A34A'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=JetBrains+Mono:wght@400;500&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -27,7 +27,19 @@ const PAGE_HTML = `<!doctype html>
 <!-- ================= NAV ================= -->
 <header class="nav" role="banner">
   <a class="nav__brand" href="#top" aria-label="GRC Forge home">
-    <span class="nav__brand-mark" aria-hidden="true"></span>
+    <svg class="nav__brand-mark" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+      <path d="M32 4 L54 11 V31 C54 47 44 55 32 60 C20 55 10 47 10 31 V11 Z" fill="var(--navy-shield)" stroke="var(--gold)" stroke-width="3" stroke-linejoin="round"/>
+      <line x1="32" y1="16" x2="22" y2="26" stroke="var(--gold)" stroke-width="2"/>
+      <line x1="32" y1="16" x2="42" y2="26" stroke="var(--gold)" stroke-width="2"/>
+      <line x1="22" y1="26" x2="32" y2="36" stroke="var(--gold)" stroke-width="2"/>
+      <line x1="42" y1="26" x2="32" y2="36" stroke="var(--gold)" stroke-width="2"/>
+      <line x1="32" y1="36" x2="32" y2="42" stroke="var(--gold)" stroke-width="2"/>
+      <circle cx="32" cy="16" r="3.2" fill="var(--gold)"/>
+      <circle cx="22" cy="26" r="3.2" fill="var(--gold)"/>
+      <circle cx="42" cy="26" r="3.2" fill="var(--gold)"/>
+      <circle cx="32" cy="36" r="3.2" fill="var(--gold)"/>
+      <path d="M17 42 H47 V46 H38 V49 H41 V52 H23 V49 H26 V46 H17 Z" fill="var(--gold)"/>
+    </svg>
     <span data-i18n="brand">GRC · FORGE</span>
   </a>
   <nav class="nav__links" aria-label="Primary">
@@ -866,7 +878,22 @@ const PAGE_HTML = `<!doctype html>
   <div class="container">
     <div class="footer__grid footer__grid--wide">
       <div>
-        <div class="footer__brand">GRC · FORGE</div>
+        <div class="footer__brand">
+          <svg class="footer__brand-mark" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+            <path d="M32 4 L54 11 V31 C54 47 44 55 32 60 C20 55 10 47 10 31 V11 Z" fill="var(--navy-shield)" stroke="var(--gold)" stroke-width="3" stroke-linejoin="round"/>
+            <line x1="32" y1="16" x2="22" y2="26" stroke="var(--gold)" stroke-width="2"/>
+            <line x1="32" y1="16" x2="42" y2="26" stroke="var(--gold)" stroke-width="2"/>
+            <line x1="22" y1="26" x2="32" y2="36" stroke="var(--gold)" stroke-width="2"/>
+            <line x1="42" y1="26" x2="32" y2="36" stroke="var(--gold)" stroke-width="2"/>
+            <line x1="32" y1="36" x2="32" y2="42" stroke="var(--gold)" stroke-width="2"/>
+            <circle cx="32" cy="16" r="3.2" fill="var(--gold)"/>
+            <circle cx="22" cy="26" r="3.2" fill="var(--gold)"/>
+            <circle cx="42" cy="26" r="3.2" fill="var(--gold)"/>
+            <circle cx="32" cy="36" r="3.2" fill="var(--gold)"/>
+            <path d="M17 42 H47 V46 H38 V49 H41 V52 H23 V49 H26 V46 H17 Z" fill="var(--gold)"/>
+          </svg>
+          <span>GRC · FORGE</span>
+        </div>
         <div class="footer__tag">Governance, risk &amp; decisions — forged into instruments.</div>
       </div>
       <div class="footer__col">

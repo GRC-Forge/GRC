@@ -148,20 +148,10 @@ html.js-ready [data-reveal].is-in {
   font-weight: 600;
 }
 .nav__brand-mark {
-  width: 22px;
-  height: 22px;
-  border-radius: 4px;
-  background:
-    linear-gradient(135deg, var(--gold) 0%, var(--gold-deep) 100%);
-  position: relative;
-  overflow: hidden;
-}
-.nav__brand-mark::after {
-  content: "";
-  position: absolute;
-  inset: 3px;
-  border: 1px solid rgba(255,255,255,.25);
-  border-radius: 2px;
+  width: 26px;
+  height: 26px;
+  display: block;
+  flex-shrink: 0;
 }
 .nav__links {
   display: flex;
@@ -1431,6 +1421,14 @@ html.js-ready [data-reveal].is-in {
   letter-spacing: 0.18em;
   font-size: 12px;
   margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.footer__brand-mark {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
 }
 .footer__tag {
   font-family: var(--font-serif);
